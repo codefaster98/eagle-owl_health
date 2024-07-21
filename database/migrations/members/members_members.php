@@ -11,22 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('speakers_speakers', function (Blueprint $table) {
-
+        Schema::create('members_members', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('code')->unique()->nullable();
-            $table->string('name_en');
-            $table->string('name_ar');
+            $table->string('code')->unique();
             $table->string('title_en');
             $table->string('title_ar');
-            $table->text('short_desc_en');
-            $table->text('short_desc_ar');
-            $table->text('long_desc_en');
-            $table->text('long_desc_ar');
+            $table->string('name_en');
+            $table->string('name_ar');
+            $table->text('desc_en');
+            $table->text('desc_ar');
             $table->string('image');
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('website')->nullable();
+
         });
     }
     /**
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('speakers_speakers');
+        Schema::dropIfExists('members_members');
     }
 };

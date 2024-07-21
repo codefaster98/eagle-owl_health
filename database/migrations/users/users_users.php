@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_users_admin', function (Blueprint $table) {
+        Schema::create('users_users', function (Blueprint $table) {
 
             $table->id();
             $table->string('code')->unique();
@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('password');
+            $table->boolean('is_member')->default(false);
+            $table->bigInteger('member_id');
+            $table->foreign('member_id')->references('id')->on('member_ship');
             $table->boolean('active')->default(false);
             $table->boolean('deleted');
         });
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_users_admin');
+        Schema::dropIfExists('users_users');
     }
 };

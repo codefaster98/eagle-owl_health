@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('speakers_speakers', function (Blueprint $table) {
-
+        Schema::create('events_events', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('code')->unique()->nullable();
-            $table->string('name_en');
-            $table->string('name_ar');
+            $table->string('code')->unique();
+            $table->string('image');
             $table->string('title_en');
             $table->string('title_ar');
             $table->text('short_desc_en');
             $table->text('short_desc_ar');
-            $table->text('long_desc_en');
             $table->text('long_desc_ar');
-            $table->string('image');
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('website')->nullable();
+            $table->string('long_desc_en');
+            $table->decimal('price');
+            $table->string('date');
+            $table->string('from_time');
+            $table->string('to_time');
+            $table->string('location');
+
         });
     }
     /**
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('speakers_speakers');
+        Schema::dropIfExists('events_events');
     }
 };
