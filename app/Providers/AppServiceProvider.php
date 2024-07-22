@@ -30,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
             base_path("database" . $ds . "migrations" . $ds . "system"),
             base_path("database" . $ds . "migrations" . $ds . "users"),
         ]);
+        $this->loadRoutesFrom(base_path("routes" . $ds . "api" . $ds . "auth.php"));
+        $this->loadRoutesFrom(base_path("routes" . $ds . "api" . $ds . "app.php"));
     }
 }

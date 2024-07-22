@@ -22,7 +22,6 @@ class SystemApiResponseServices
             "note" => $note,
         ]);
     }
-
     static public function ReturnError(int $code, array|null $data, array|string|null $message, $note = null)
     {
         return response()->json([

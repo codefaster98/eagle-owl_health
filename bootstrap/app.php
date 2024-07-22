@@ -9,7 +9,12 @@ return Application::configure(basePath: dirname(__DIR__))
         web: [
             __DIR__ . '/../routes/web/app.php',
             __DIR__ . '/../routes/web/auth.php',
+
         ],
+        // api: [
+        //     __DIR__ . '/../routes/api/app.php',
+        //     __DIR__ . '/../routes/api/auth.php',
+        // ],
         // commands: __DIR__ . '/../routes/console.php',
         // health: '/up',
     )
@@ -43,7 +48,7 @@ return Application::configure(basePath: dirname(__DIR__))
             // test database connection
             App\Http\Middlewares\GlobalDatabaseConnection::class,
             Illuminate\Routing\Middleware\SubstituteBindings::class,
-            App\Http\Middlewares\JWTMiddleware::class,
+            App\Http\Middlewares\JWTRequestValidate::class,
             // check if user is auth
         ]);
         $middleware->group('api_without_auth', [

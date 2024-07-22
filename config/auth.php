@@ -28,11 +28,11 @@ return [
     'providers' => [
         'admins' => [
             'driver' => 'eloquent',
-            'model' =>  App\Models\User::class,
+            'model' =>  App\Models\Admin\AdminUsersAdminM::class,
         ],
         'users' => [
             'driver' => 'eloquent',
-            'model' =>  App\Models\User::class,
+            'model' =>  App\Models\Users\UsersUsersM::class,
         ],
 
 

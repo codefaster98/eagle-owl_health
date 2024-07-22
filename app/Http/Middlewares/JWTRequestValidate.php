@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class JWTMiddleware
+class JWTRequestValidate
 {
     /**
      * Handle an incoming request.

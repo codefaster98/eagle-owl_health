@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
         Schema::create('users_users', function (Blueprint $table) {
-
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->id();
@@ -23,6 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('password');
+            $table->string('otp')->nullable();
             $table->boolean('is_member')->default(false);
             $table->foreignId('member_id')->nullable()->references('id')->on('memberships_member_ship')->constrained();
             $table->boolean('active')->default(false);
