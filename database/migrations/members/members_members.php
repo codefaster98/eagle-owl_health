@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('members_members', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
             $table->string('code')->unique();
             $table->string('title_en');
@@ -24,14 +27,16 @@ return new class extends Migration
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('website')->nullable();
-
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('members_members');
+        Schema::enableForeignKeyConstraints();
     }
 };

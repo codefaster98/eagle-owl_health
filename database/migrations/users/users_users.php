@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('users_users', function (Blueprint $table) {
 
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
             $table->string('code')->unique();
             $table->string('fname');
@@ -21,17 +24,19 @@ return new class extends Migration
             $table->string('phone');
             $table->string('password');
             $table->boolean('is_member')->default(false);
-            $table->bigInteger('member_id');
-            $table->foreign('member_id')->references('id')->on('member_ship');
+            $table->foreignId('member_id')->nullable()->references('id')->on('memberships_member_ship')->constrained();
             $table->boolean('active')->default(false);
             $table->boolean('deleted');
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users_users');
+        Schema::enableForeignKeyConstraints();
     }
 };

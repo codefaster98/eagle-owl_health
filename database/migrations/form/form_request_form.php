@@ -11,20 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('form_request_form', function (Blueprint $table) {
-
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
             $table->string('name');
             $table->string('phone');
             $table->string('email');
             $table->text('message');
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('form_request_form');
+        Schema::enableForeignKeyConstraints();
     }
 };

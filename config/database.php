@@ -45,7 +45,7 @@ return [
         'dev' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
-            'host' => "127.0.0.1",
+            'host' => "db.bsoft.giize.com",
             'port' => "3306",
             'database' => "health_care",
             'username' => "health_care",

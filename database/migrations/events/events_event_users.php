@@ -11,22 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('events_event_users', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
-            $table->bigInteger('events_id');
-            $table->foreign('events_id')->references('id')->on('events');
-            $table->bigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreignId('events_id')->nullable()->references('id')->on('events_events')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->references('id')->on('users_users')->constrained()->cascadeOnDelete();
+
             $table->string('payment_id')->nullable();
             $table->json('payment_details')->nullable();
             $table->string('time');
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('events_event_users');
+        Schema::enableForeignKeyConstraints();
     }
 };

@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('admin_users_admin', function (Blueprint $table) {
-
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
             $table->string('code')->unique();
             $table->string('fname');
@@ -23,12 +25,15 @@ return new class extends Migration
             $table->boolean('active')->default(false);
             $table->boolean('deleted');
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('admin_users_admin');
+        Schema::enableForeignKeyConstraints();
     }
 };

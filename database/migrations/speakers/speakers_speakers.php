@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('speakers_speakers', function (Blueprint $table) {
 
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
-            $table->bigInteger('code')->unique()->nullable();
+            $table->string('code')->unique();
             $table->string('name_en');
             $table->string('name_ar');
             $table->string('title_en');
@@ -28,12 +31,15 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('website')->nullable();
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('speakers_speakers');
+        Schema::enableForeignKeyConstraints();
     }
 };

@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('events_events', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
             $table->string('code')->unique();
             $table->string('image');
@@ -26,14 +29,16 @@ return new class extends Migration
             $table->string('from_time');
             $table->string('to_time');
             $table->string('location');
-
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('events_events');
+        Schema::enableForeignKeyConstraints();
     }
 };

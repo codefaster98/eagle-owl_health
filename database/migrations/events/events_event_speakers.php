@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('events_event_speakers', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
             $table->id();
-            $table->bigInteger('events_id');
-            $table->foreign('events_id')->references('id')->on('events');
-            $table->bigInteger('speakers_id');
-            $table->foreign('speakers_id')->references('id')->on('speakers');
-
-
+            $table->foreignId('events_id')->nullable()->references('id')->on('events_events')->constrained()->cascadeOnDelete();
+            $table->foreignId('speakers_id')->nullable()->references('id')->on('speakers_speakers')->constrained()->cascadeOnDelete();
         });
+        Schema::enableForeignKeyConstraints();
     }
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('events_event_speakers');
+        Schema::enableForeignKeyConstraints();
     }
 };
