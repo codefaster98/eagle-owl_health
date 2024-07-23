@@ -18,5 +18,8 @@ return [
      "MessageSucc"=>"Message Send Successfuly",
      "MessageFailed"=>"Message Failed",
     ],
+    "events_events"=>[
+     "eventsFailed"=>"No Members",
+    ],
 
 ];

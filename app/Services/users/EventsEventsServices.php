@@ -7,10 +7,6 @@ use App\Models\Events\EventsEventsM;
 class EventsEventsServices
 {
 
-    public function getAllEvent()
-    {
-        return EventsEventsM::all();
-    }
     public function getAllEvents($language)
     {
         if ($language == 'ar') {
