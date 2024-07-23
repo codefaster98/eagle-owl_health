@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api\auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
 use App\Http\Requests\api\auth\AuthLoginRequest;
 use App\Http\Requests\api\auth\AuthRegisterRequest;
 use App\Http\Requests\api\auth\AuthVerifyRequest;
-use App\Http\Requests\api\auth\LoginRequest;
 use App\Services\system\SystemApiResponseServices;
 use App\Services\users\UsersUsersServices;
 use Illuminate\Support\Facades\DB;
 
 class auth extends Controller
 {
-    // 
+    //
     public function Register(AuthRegisterRequest $request)
     {
         try {

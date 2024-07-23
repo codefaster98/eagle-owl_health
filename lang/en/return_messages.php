@@ -11,4 +11,12 @@ return [
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
     ],
+    "members_members"=>[
+     "FetchFailed"=>"No Members Avaliable"
+    ],
+    "form_request_form"=>[
+     "MessageSucc"=>"Message Send Successfuly",
+     "MessageFailed"=>"Message Failed",
+    ],
+
 ];

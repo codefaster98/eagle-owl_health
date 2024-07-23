@@ -2,10 +2,10 @@
 
 namespace App\Services\users;
 
-use App\Mail\users\VerifyCodeEmail;
-use App\Models\Users\UsersUsersM;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Models\Users\UsersUsersM;
+use App\Mail\users\VerifyCodeEmail;
+use Illuminate\Support\Facades\Mail;
 
 class UsersUsersServices
 {
@@ -44,7 +44,7 @@ class UsersUsersServices
     }
     static public function Verify($user_code, $otp_code)
     {
-        // check if $user_code and $otp_code exists 
+        // check if $user_code and $otp_code exists
         $user = UsersUsersM::where([
             "code" => $user_code,
             "otp" => $otp_code,
@@ -62,4 +62,5 @@ class UsersUsersServices
             return false;
         }
     }
+
 }

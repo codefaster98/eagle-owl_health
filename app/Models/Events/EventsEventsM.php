@@ -2,6 +2,7 @@
 
 namespace App\Models\Events;
 
+use App\Models\Speakers\SpeakersSpeakersM;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,4 +24,8 @@ class EventsEventsM extends Model
         'to_time',
         'location',
     ];
+     public function speakers(){
+        $this->belongsToMany(SpeakersSpeakersM::class,
+        'event_speakers', 'events_id', 'speakers_id');
+     }
 }
