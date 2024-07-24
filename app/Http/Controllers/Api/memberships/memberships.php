@@ -1,30 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\api\members;
+namespace App\Http\Controllers\Api\memberships;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\system\SystemApiResponseServices;
-use Illuminate\Http\JsonResponse;
-use App\Services\users\MembersMembersServices;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Services\users\MemberShipsMembershipServices;
 
-class members extends Controller
+class memberships extends Controller
 {
-
     protected $memberService;
 
-    public function __construct(MembersMembersServices $memberService)
+    public function __construct(MemberShipsMembershipServices $memberService)
     {
         $this->memberService = $memberService;
     }
-    public function getMembers(Request $request): JsonResponse
+    public function memberShips(Request $request): JsonResponse
     {
         try {
             $language = $request->query('lang', 'en');
 
             $data = DB::transaction(function () use ($language) {
-                return $this->memberService->getMembers($language);
+                return $this->memberService->memberShips($language);
             });
 
             if ($data) {
@@ -48,6 +47,4 @@ class members extends Controller
             );
         }
     }
-
 }
-

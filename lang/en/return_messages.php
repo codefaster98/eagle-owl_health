@@ -21,5 +21,8 @@ return [
     "events_events"=>[
      "eventsFailed"=>"No Members",
     ],
+    "memberships_member_ship"=>[
+     "eventsFailed"=>"failed ",
+    ],
 
 ];
