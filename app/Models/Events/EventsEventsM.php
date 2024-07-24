@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class EventsEventsM extends Model
 {
     use HasFactory;
+    protected $table = "events_events";
+
     protected $fillable = [
         'code',
         'image',

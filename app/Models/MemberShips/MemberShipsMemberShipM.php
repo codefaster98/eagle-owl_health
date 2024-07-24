@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class MemberShipsMemberShipM extends Model
 {
     use HasFactory;
+    protected $table = "memberships_member_ship";
+
     protected $fillable = [
 
         'name_en',

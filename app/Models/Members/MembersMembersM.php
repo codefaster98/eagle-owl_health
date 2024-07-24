@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MembersMembersM extends Model
 {
     use HasFactory;
+    protected $table = "members_members";
     protected $fillable = [
         'code',
         'title_en',
