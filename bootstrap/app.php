@@ -46,11 +46,20 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->group('api_with_auth', [
             // test database connection
-            App\Http\Middlewares\GlobalDatabaseConnection::class,
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // App\Http\Middlewares\GlobalDatabaseConnection::class,
+            // Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
             App\Http\Middlewares\JWTRequestValidate::class,
             // check if user is auth
         ]);
+        $middleware->group('api', [
+            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            // 'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            App\Http\Middlewares\JWTRequestValidate::class,
+        ]);
+
         $middleware->group('api_without_auth', [
             // test database connection
             App\Http\Middlewares\GlobalDatabaseConnection::class,

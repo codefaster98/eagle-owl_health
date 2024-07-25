@@ -10,6 +10,7 @@ use App\Http\Requests\api\auth\AuthRegisterRequest;
 use App\Http\Requests\api\auth\AuthVerifyRequest;
 use App\Services\system\SystemApiResponseServices;
 use App\Services\users\UsersUsersServices;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 
 class auth extends Controller
@@ -76,8 +77,11 @@ class auth extends Controller
     public function Logout()
     {
         try {
-            $logout = UsersUsersServices::Logout();
-            if ($logout) {
+            // $logout = UsersUsersServices::Logout();
+            // dd($logout/);
+            FacadesAuth::logout();
+            dd(auth()->user());
+            if (auth()->logout()) {
                 return  SystemApiResponseServices::ReturnSuccess(
                     [],
                     __("return_messages.user_users.LogoutSucc"),

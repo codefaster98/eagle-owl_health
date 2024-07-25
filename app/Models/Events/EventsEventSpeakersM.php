@@ -2,6 +2,7 @@
 
 namespace App\Models\Events;
 
+use App\Models\Speakers\SpeakersSpeakersM;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,4 +15,8 @@ class EventsEventSpeakersM extends Model
         'events_id',
         'speakers_id',
     ];
+    public function Speaker()
+    {
+        return $this->hasOne(SpeakersSpeakersM::class, "id", "speakers_id");
+    }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Services\system;
 
+use Illuminate\Database\Eloquent\Collection;
+
 class SystemApiResponseServices
 {
-    static public function ReturnSuccess(array $data, array|string|null $message, string|null $note)
+    static public function ReturnSuccess(array|Collection $data, array|string|null $message, string|null $note)
     {
         return response()->json([
             "code" => 200,

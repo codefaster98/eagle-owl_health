@@ -3,42 +3,26 @@
 namespace App\Http\Controllers\api\members;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\memberships\MembershipsMembershipsGetAllRequest;
 use App\Services\system\SystemApiResponseServices;
-use Illuminate\Http\JsonResponse;
-use App\Services\users\MembersMembersServices;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Services\members\MembersMembersServices;
+
 
 class members extends Controller
 {
-
-    protected $memberService;
-
-    public function __construct(MembersMembersServices $memberService)
-    {
-        $this->memberService = $memberService;
-    }
-    public function getMembers(Request $request): JsonResponse
+    public function GetAll(MembershipsMembershipsGetAllRequest $request)
     {
         try {
-            $language = $request->query('lang', 'en');
-
-            $data = DB::transaction(function () use ($language) {
-                return $this->memberService->getMembers($language);
-            });
-
-            if ($data) {
-                return SystemApiResponseServices::ReturnSuccess(
-                    ["members" => $data],
-                    null,
-                    null
-                );
+            if ($request->random) {
+                $memberships = MembersMembersServices::GetAllWithLimitAndRandom(null, $request->limit);
             } else {
-                return SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.members_members.FetchFailed"),
-                    null
-                );
+                $memberships = MembersMembersServices::GetAllWithLimit(null, $request->limit);
+            }
+
+            if (count($memberships) > 0) {
+                return SystemApiResponseServices::ReturnSuccess($memberships, null, null);
+            } else {
+                return SystemApiResponseServices::ReturnFailed([], __("return_messages.members_members.NotFound"), null);
             }
         } catch (\Throwable $th) {
             return SystemApiResponseServices::ReturnError(
@@ -48,6 +32,6 @@ class members extends Controller
             );
         }
     }
-
+    
 }
 

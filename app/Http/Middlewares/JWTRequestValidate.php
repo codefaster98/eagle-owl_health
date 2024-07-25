@@ -19,7 +19,10 @@ class JWTRequestValidate
     public function handle(Request $request, Closure $next): Response
     {
         try {
+            $headers = apache_request_headers(); //get header
+            // $request->headers->set('Authorization', $headers['authorization']); // set header in request
             $user = JWTAuth::parseToken()->authenticate();
+            // dd("44");
             // dd($user);
         } catch (\Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
@@ -27,6 +30,7 @@ class JWTRequestValidate
             } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
                 return SystemApiResponseServices::ReturnError(9803, [], __("auth.TokenIsExpired"));
             } else {
+                // dd($headers);
                 return SystemApiResponseServices::ReturnError(9804, [], __("auth.AuthorizationTokenNotFound"));
             }
         }

@@ -11,18 +11,22 @@ return [
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
     ],
-    "members_members"=>[
-     "FetchFailed"=>"No Members Avaliable"
+    // "members_members" => [
+    //     "FetchFailed" => "No Members Avaliable"
+    // ],
+    "form_request" => [
+        "AddSucc" => "Message Send Successfuly",
+        "AddFailed" => "Message Failed",
     ],
-    "form_request_form"=>[
-     "MessageSucc"=>"Message Send Successfuly",
-     "MessageFailed"=>"Message Failed",
+    "events_events" => [
+        "NotFound" => "No Events Found",
     ],
-    "events_events"=>[
-     "eventsFailed"=>"No Members",
+    "memberships_member_ship" => [
+        "NotFound" => "No Memberships Found",
     ],
-    "memberships_member_ship"=>[
-     "Failed"=>"failed ",
+
+    "members_members" => [
+        "NotFound" => "No Members Found",
     ],
 
 ];

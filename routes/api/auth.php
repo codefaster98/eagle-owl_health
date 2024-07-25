@@ -19,36 +19,13 @@ Route::name("api.auth.")
 // with auth
 Route::name("api.auth.")
     ->prefix("API/Auth")
-    ->middleware(['api_with_auth'])
+    ->middleware(['api', 'api_with_auth'])
     ->controller(auth::class)
     ->group(function () {
         Route::post('/Logout', 'Logout')->name("Logout");
     });
-Route::name("api.auth.")
-    ->prefix("API/Users")
-    ->middleware(['api_without_auth'])
-    ->controller(eventsevents::class)
-    ->group(function () {
-        Route::get('/getAllEvents', 'getAllEvents')->name("all");
-        Route::get('/show/{id}', 'show')->name("showEvents");
-    });
 
-Route::name("api.auth.")
-    ->prefix("API/Users")
-    ->middleware(['api_without_auth'])
-    ->controller(requestform::class)
-    ->group(function () {
-        Route::post('/form', 'form')->name("request_form");
-    });
-    Route::name("api.auth.")
-    ->prefix("API/Users")
-    ->middleware(['api_without_auth'])
-    ->controller(members::class)
-    ->group(function () {
-        Route::get('/getMembers', 'getMembers')->name("getMembers");
-    });
-
-
+    
 
 
 

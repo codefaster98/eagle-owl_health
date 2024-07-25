@@ -6,39 +6,25 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\events\EventsEventsGetAllRequest;
 use App\Services\users\EventsEventsServices;
 use App\Services\system\SystemApiResponseServices;
 
 class eventsevents extends Controller
 {
-    protected $eventService;
-
-    public function __construct(EventsEventsServices $eventService)
-    {
-        $this->eventService = $eventService;
-    }
-
-    public function getAllEvents(Request $request): JsonResponse
+    public function GetAll(EventsEventsGetAllRequest $request)
     {
         try {
-            $language = $request->query('lang', 'en');
-
-            $events = DB::transaction(function () use ($language) {
-                return $this->eventService->getAllEvents($language);
-            });
-
-            if ($events) {
-                return SystemApiResponseServices::ReturnSuccess(
-                    ["events" => $events],
-                    null,
-                    null
-                );
+            if ($request->random) {
+                $events = EventsEventsServices::GetAllWithLimitAndRandom(null, $request->limit);
             } else {
-                return SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.events_events.eventsFailed"),
-                    null
-                );
+                $events = EventsEventsServices::GetAllWithLimit(null, $request->limit);
+            }
+
+            if (count($events) > 0) {
+                return SystemApiResponseServices::ReturnSuccess($events, null, null);
+            } else {
+                return SystemApiResponseServices::ReturnFailed([], __("return_messages.events_events.NotFound"), null);
             }
         } catch (\Throwable $th) {
             return SystemApiResponseServices::ReturnError(
@@ -48,27 +34,14 @@ class eventsevents extends Controller
             );
         }
     }
-
-    public function show(Request $request, $id): JsonResponse
+    public function Details($request_code)
     {
         try {
-            $language = $request->query('lang', 'en');
-            $event = DB::transaction(function () use ($id, $language) {
-                return $this->eventService->show($id, $language);
-            });
-
+            $event[] = EventsEventsServices::GetByCode(["Speakers"], $request_code);
             if ($event) {
-                return SystemApiResponseServices::ReturnSuccess(
-                    ["event" => $event],
-                    null,
-                    null
-                );
+                return SystemApiResponseServices::ReturnSuccess($event, null, null);
             } else {
-                return SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.events_events.eventsFailed"),
-                    null
-                );
+                return SystemApiResponseServices::ReturnFailed([], __("return_messages.events_events.NotFound"), null);
             }
         } catch (\Throwable $th) {
             return SystemApiResponseServices::ReturnError(

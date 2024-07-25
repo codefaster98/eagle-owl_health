@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpeakersSpeakersM extends Model
 {
-    use HasFactory;
+    protected $table = "speakers_speakers";
+
     protected $fillable = [
         'code',
         'title_en',
@@ -24,8 +25,13 @@ class SpeakersSpeakersM extends Model
         'twitter',
         'website',
     ];
-    public function events(){
-        $this->belongsToMany(EventsEventsM::class,
-        'event_speakers', 'speakers_id', 'events_id');
-     }
+    public function events()
+    {
+        $this->belongsToMany(
+            EventsEventsM::class,
+            'event_speakers',
+            'speakers_id',
+            'events_id'
+        );
+    }
 }

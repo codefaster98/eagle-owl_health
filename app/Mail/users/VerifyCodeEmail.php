@@ -36,9 +36,14 @@ class VerifyCodeEmail extends Mailable
      */
     public function content(): Content
     {
+        // view("")
         return new Content(
-            htmlString: "Youd Verfy Code <br>" . $this->code
-            // view: 'view.name',
+            // htmlString: "Youd Verfy Code <br>" . $this->code
+            view: 'mails.verify',
+            with: [
+                "code" => $this->code,
+                "code_array" => str_split($this->code)
+            ]
         );
     }
 

@@ -26,8 +26,12 @@ class EventsEventsM extends Model
         'to_time',
         'location',
     ];
-     public function speakers(){
-        $this->belongsToMany(SpeakersSpeakersM::class,
-        'event_speakers', 'events_id', 'speakers_id');
-     }
+    public function Speakers()
+    {
+        return $this->hasMany(EventsEventSpeakersM::class, "events_id", "id")->with(["Speaker"]);
+    }
+    //  public function speakers(){
+    //     $this->belongsToMany(SpeakersSpeakersM::class,
+    //     'event_speakers', 'events_id', 'speakers_id');
+    //  }
 }

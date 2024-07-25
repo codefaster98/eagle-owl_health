@@ -32,3 +32,9 @@ Route::get('', function () {
     //     \Center\Http\Services\system\CenterSystemRuleGroupServices::GetSystemRules();
     // return $data;
 });
+Route::get('mail', function () {
+    $data = [
+        'code_array' => str_split(123456)
+    ];
+    return view("mails.verify", $data);
+});
