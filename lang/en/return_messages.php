@@ -22,7 +22,7 @@ return [
      "eventsFailed"=>"No Members",
     ],
     "memberships_member_ship"=>[
-     "eventsFailed"=>"failed ",
+     "Failed"=>"failed ",
     ],
 
 ];

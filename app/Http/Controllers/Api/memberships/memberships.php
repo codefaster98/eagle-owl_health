@@ -28,14 +28,43 @@ class memberships extends Controller
 
             if ($data) {
                 return SystemApiResponseServices::ReturnSuccess(
-                    ["members" => $data],
+                    ["data" => $data],
                     null,
                     null
                 );
             } else {
                 return SystemApiResponseServices::ReturnFailed(
                     [],
-                    __("return_messages.members_members.FetchFailed"),
+                    __("return_messages.memberships_member_ship.Failed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
+    public function show(Request $request, $id): JsonResponse
+    {
+        try {
+            $language = $request->query('lang', 'en');
+            $data = DB::transaction(function () use ($id, $language) {
+                return $this->memberService->show($id, $language);
+            });
+
+            if ($data) {
+                return SystemApiResponseServices::ReturnSuccess(
+                    ["data" => $data],
+                    null,
+                    null
+                );
+            } else {
+                return SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.memberships_member_ship.Failed"),
                     null
                 );
             }

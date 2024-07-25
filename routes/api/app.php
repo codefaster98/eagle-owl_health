@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\auth\auth;
 use App\Http\Controllers\api\members\members;
 use App\Http\Controllers\api\form\requestform;
 use App\Http\Controllers\Api\events\eventsevents;
+use App\Http\Controllers\Api\memberships\memberships;
 
 // without auth
 Route::name("api.auth.")
@@ -46,4 +47,13 @@ Route::name("api.auth.")
     ->controller(members::class)
     ->group(function () {
         Route::get('/getMembers', 'getMembers')->name("getMembers");
+    });
+    Route::name("api.auth.")
+    ->prefix("API/Users")
+    ->middleware(['api_without_auth'])
+    ->controller(memberships::class)
+    ->group(function () {
+        Route::get('/memberShips', 'memberShips')->name("memberShips");
+        Route::get('/showM/{id}', 'show')->name("showMemberSgips");
+
     });
