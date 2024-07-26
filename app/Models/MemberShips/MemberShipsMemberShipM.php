@@ -9,6 +9,7 @@ class MemberShipsMemberShipM extends Model
 {
     use HasFactory;
     protected $table = "memberships_member_ship";
+    public $timestamps = false;
 
     protected $fillable = [
 
@@ -17,5 +18,9 @@ class MemberShipsMemberShipM extends Model
         'list_en',
         'list_ar',
         'amount',
+    ];
+    protected $casts = [
+        'list_en' => "array",
+        'list_ar' => "array",
     ];
 }

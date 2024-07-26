@@ -3,9 +3,19 @@
 namespace App\Services\memberships;
 
 use App\Models\MemberShips\MemberShipsMemberShipM;
+use Illuminate\Support\Str;
 
 class MembershipsMembershipsServices
 {
+    static public function GenerateNewCode()
+    {
+        $code = Str::random(5);
+        if (MemberShipsMemberShipM::where('code', $code)->exists()) {
+            return Self::GenerateNewCode();
+        } else {
+            return $code;
+        }
+    }
     static public function GetAllWithLimit(array|null $Relations, int $limit)
     {
         if ($Relations) {
