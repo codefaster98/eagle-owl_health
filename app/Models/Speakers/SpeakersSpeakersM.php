@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class SpeakersSpeakersM extends Model
 {
     protected $table = "speakers_speakers";
+    public $timestamps = false;
 
     protected $fillable = [
         'code',

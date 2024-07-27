@@ -13,6 +13,7 @@ class MemberShipsMemberShipM extends Model
 
     protected $fillable = [
 
+        'code',
         'name_en',
         'name_ar',
         'list_en',
