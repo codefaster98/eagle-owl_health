@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Api\auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
+use App\Services\users\UsersUsersServices;
 use App\Http\Requests\api\auth\AuthLoginRequest;
-use App\Http\Requests\api\auth\AuthRegisterRequest;
 use App\Http\Requests\api\auth\AuthVerifyRequest;
 use App\Services\system\SystemApiResponseServices;
-use App\Services\users\UsersUsersServices;
+use App\Http\Requests\api\auth\AuthRegisterRequest;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
+
 
 class auth extends Controller
 {
@@ -101,6 +102,7 @@ class auth extends Controller
                 $th->getMessage(),
             );
         }
+
     }
     public function Verify(AuthVerifyRequest $request)
     {

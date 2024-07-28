@@ -64,5 +64,4 @@ class UsersUsersServices
             return false;
         }
     }
-
 }
