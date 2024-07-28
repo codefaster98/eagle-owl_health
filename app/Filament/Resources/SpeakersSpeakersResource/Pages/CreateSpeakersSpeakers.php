@@ -7,10 +7,15 @@ use App\Models\Speakers\SpeakersSpeakersM;
 use Filament\Actions;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Pages\CreateRecord;
+
+use function Laravel\Prompts\select;
 
 class CreateSpeakersSpeakers extends CreateRecord
 {
@@ -45,6 +50,7 @@ class CreateSpeakersSpeakers extends CreateRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('speakers_speakers'),
+               
             ]);
     }
     static public function GenerateNewCode()

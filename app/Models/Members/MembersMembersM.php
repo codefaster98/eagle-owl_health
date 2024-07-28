@@ -9,6 +9,7 @@ class MembersMembersM extends Model
 {
     use HasFactory;
     protected $table = "members_members";
+    public $timestamps = false;
     protected $fillable = [
         'code',
         'title_en',

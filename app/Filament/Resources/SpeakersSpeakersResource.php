@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\EventsResource\RelationManagers\SpeakersSpeakersRelationManager;
+use App\Filament\Resources\SpeakersResource\RelationManagers\EventsEventsRelationManager;
 use App\Filament\Resources\SpeakersSpeakersResource\Pages;
 use App\Filament\Resources\SpeakersSpeakersResource\RelationManagers;
 use App\Models\Speakers\SpeakersSpeakersM;
@@ -19,7 +21,7 @@ class SpeakersSpeakersResource extends Resource
     protected static ?string $model = SpeakersSpeakersM::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = "speakers Panel";
+    protected static ?string $modelLabel = "Speakers Panel";
 
     public static function form(Form $form): Form
     {
@@ -38,6 +40,7 @@ class SpeakersSpeakersResource extends Resource
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('name_en'),
                 Tables\Columns\TextColumn::make('name_ar'),
+                Tables\Columns\TextColumn::make('name_ar'), 
             ])
             ->filters([
                 //

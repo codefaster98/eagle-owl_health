@@ -2,25 +2,24 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\MembersMembersResource\Pages;
+use App\Filament\Resources\MembersMembersResource\RelationManagers;
+use App\Models\Members\MembersMembersM;
+use App\Models\MembersMembers;
 use Filament\Forms;
-use Filament\Tables;
 use Filament\Forms\Form;
-use Filament\Tables\Table;
-use App\Models\EventsEvents;
 use Filament\Resources\Resource;
-use App\Models\Events\EventsEventsM;
+use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\EventsEventsResource\Pages;
-use App\Filament\Resources\EventsEventsResource\RelationManagers;
-use App\Filament\Resources\EventsResource\RelationManagers\SpeakersSpeakersRelationManager;
 
-class EventsEventsResource extends Resource
+class MembersMembersResource extends Resource
 {
-    protected static ?string $model = EventsEventsM::class;
+    protected static ?string $model = MembersMembersM::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = "events Panel";
+    protected static ?string $modelLabel = "Members Panel";
 
 
     public static function form(Form $form): Form
@@ -38,8 +37,10 @@ class EventsEventsResource extends Resource
                 Tables\Columns\TextColumn::make('code'),
                 Tables\Columns\TextColumn::make('title_en'),
                 Tables\Columns\TextColumn::make('title_ar'),
-                Tables\Columns\TextColumn::make('short_desc_en')->limit(50),
-                Tables\Columns\TextColumn::make('short_desc_ar')->limit(50),
+                Tables\Columns\TextColumn::make('name_en'),
+                Tables\Columns\TextColumn::make('name_ar'),
+                Tables\Columns\TextColumn::make('desc_en'),
+                Tables\Columns\TextColumn::make('desc_ar'),
             ])
             ->filters([
                 //
@@ -57,17 +58,16 @@ class EventsEventsResource extends Resource
     public static function getRelations(): array
     {
         return [
-        // 
-
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEventsEvents::route('/'),
-            'create' => Pages\CreateEventsEvents::route('/create'),
-            'edit' => Pages\EditEventsEvents::route('/{record}/edit'),
+            'index' => Pages\ListMembersMembers::route('/'),
+            'create' => Pages\CreateMembersMembers::route('/create'),
+            'edit' => Pages\EditMembersMembers::route('/{record}/edit'),
         ];
     }
 }

@@ -28,12 +28,12 @@ class SpeakersSpeakersM extends Model
     ];
     public function events()
     {
-        // $this->belongsToMany(
-        //     EventsEventsM::class,
-        //     'event_speakers',
-        //     'speakers_id',
-        //     'events_id'
-        // );
-        return $this->belongsToMany(EventsEventsM::class);
+        $this->belongsToMany(
+            EventsEventsM::class,
+            'event_speakers',
+            'speakers_id',
+            'events_id'
+        );
+        // return $this->belongsToMany(EventsEventsM::class);
     }
 }
