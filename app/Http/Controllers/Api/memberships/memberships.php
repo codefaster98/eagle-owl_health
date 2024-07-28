@@ -35,69 +35,22 @@ class memberships extends Controller
             );
         }
     }
-    // protected $memberService;
+    public function Details($request_code)
+    {
 
-    // public function __construct(MemberShipsMembershipServices $memberService)
-    // {
-    //     $this->memberService = $memberService;
-    // }
-    // public function memberShips(Request $request): JsonResponse
-    // {
-    //     try {
-    //         $language = $request->query('lang', 'en');
-
-    //         $data = DB::transaction(function () use ($language) {
-    //             return $this->memberService->memberShips($language);
-    //         });
-
-    //         if ($data) {
-    //             return SystemApiResponseServices::ReturnSuccess(
-    //                 ["data" => $data],
-    //                 null,
-    //                 null
-    //             );
-    //         } else {
-    //             return SystemApiResponseServices::ReturnFailed(
-    //                 [],
-    //                 __("return_messages.memberships_member_ship.Failed"),
-    //                 null
-    //             );
-    //         }
-    //     } catch (\Throwable $th) {
-    //         return SystemApiResponseServices::ReturnError(
-    //             9800,
-    //             null,
-    //             $th->getMessage(),
-    //         );
-    //     }
-    // }
-    // public function show(Request $request, $id): JsonResponse
-    // {
-    //     try {
-    //         $language = $request->query('lang', 'en');
-    //         $data = DB::transaction(function () use ($id, $language) {
-    //             return $this->memberService->show($id, $language);
-    //         });
-
-    //         if ($data) {
-    //             return SystemApiResponseServices::ReturnSuccess(
-    //                 ["data" => $data],
-    //                 null,
-    //                 null
-    //             );
-    //         } else {
-    //             return SystemApiResponseServices::ReturnFailed(
-    //                 [],
-    //                 __("return_messages.memberships_member_ship.Failed"),
-    //                 null
-    //             );
-    //         }
-    //     } catch (\Throwable $th) {
-    //         return SystemApiResponseServices::ReturnError(
-    //             9800,
-    //             null,
-    //             $th->getMessage(),
-    //         );
-    //     }
-    // }
+        try {
+            $mships = MembershipsMembershipsServices::GetByCode([], $request_code);
+            if ($mships&&$request_code) {
+                return SystemApiResponseServices::ReturnSuccess($mships, null, null);
+            } else {
+                return SystemApiResponseServices::ReturnFailed([], __("return_messages.memberships_member_ship.NotFound"), null);
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
 }

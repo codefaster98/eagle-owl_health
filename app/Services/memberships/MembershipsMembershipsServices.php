@@ -32,4 +32,12 @@ class MembershipsMembershipsServices
             return MemberShipsMemberShipM::inRandomOrder()->limit($limit)->get();
         }
     }
+    static public function GetByCode(array|null $Relations, $mships_code)
+    {
+        if ($Relations) {
+            return MemberShipsMemberShipM::where('code', $mships_code)->with($Relations)->get();
+        } else {
+            return MemberShipsMemberShipM::where('code', $mships_code)->get();
+        }
+    }
 }

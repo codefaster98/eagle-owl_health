@@ -80,7 +80,7 @@ class auth extends Controller
             // $logout = UsersUsersServices::Logout();
             // dd($logout/);
             FacadesAuth::logout();
-            dd(auth()->user());
+            // dd(auth()->user());
             if (auth()->logout()) {
                 return  SystemApiResponseServices::ReturnSuccess(
                     [],

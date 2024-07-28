@@ -11,9 +11,6 @@ return [
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
     ],
-    // "members_members" => [
-    //     "FetchFailed" => "No Members Avaliable"
-    // ],
     "form_request" => [
         "AddSucc" => "Message Send Successfuly",
         "AddFailed" => "Message Failed",

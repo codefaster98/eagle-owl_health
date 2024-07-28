@@ -7,7 +7,7 @@ use App\Http\Controllers\api\form\requestform;
 use App\Http\Controllers\Api\events\eventsevents;
 use App\Http\Controllers\api\form_request\form_request;
 use App\Http\Controllers\Api\memberships\memberships;
-// all routes without auth 
+// all routes without auth
 Route::name("api.app.")
     ->prefix("API/")
     ->middleware(['api_without_auth'])
@@ -33,6 +33,7 @@ Route::name("api.app.")
             ->controller(memberships::class)
             ->group(function () {
                 Route::get('All', 'GetAll')->name("GetAll");
+                Route::get('{code}/Details', 'Details')->name("Details");
             });
         // form request routes
         Route::name("form_request.")
