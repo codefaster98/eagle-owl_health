@@ -43,6 +43,7 @@ class UsersUsersServices
         return auth()->logout();
         return auth("api")->user();
         return auth("api")->logout();
+
     }
     static public function Verify($user_code, $otp_code)
     {

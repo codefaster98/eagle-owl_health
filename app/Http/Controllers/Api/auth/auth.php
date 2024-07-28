@@ -79,7 +79,7 @@ class auth extends Controller
     {
         try {
             // $logout = UsersUsersServices::Logout();
-            // dd($logout/);
+            // dd($logout);
             FacadesAuth::logout();
             // dd(auth()->user());
             if (auth()->logout()) {
