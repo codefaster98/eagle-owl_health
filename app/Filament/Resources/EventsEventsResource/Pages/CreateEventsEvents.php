@@ -48,9 +48,7 @@ class CreateEventsEvents extends CreateRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
-                // TextColumn::make('speakers_speakers.code')
-                // ->label('Speakers')
-                // ->limit(50),
+             
             ]);
 
     }

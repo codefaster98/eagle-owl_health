@@ -29,11 +29,6 @@ class EventsEventsResource extends Resource
     {
                 return $form
             ->schema([
-                // الحقول الأخرى
-                Select::make('speakers')
-                    ->multiple()
-                    ->relationship('speakers_speakers', 'code')
-                    ->preload(),
             ]);
 
     }
@@ -47,7 +42,7 @@ class EventsEventsResource extends Resource
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('short_desc_en')->limit(50),
                 Tables\Columns\TextColumn::make('short_desc_ar')->limit(50),
-               
+
             ])
             ->filters([
                 //

@@ -29,10 +29,7 @@ class SpeakersSpeakersResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('events')
-                ->multiple()
-                ->relationship('events_events', 'code')
-                ->preload(),
+              
             ]);
 
 
@@ -48,9 +45,7 @@ class SpeakersSpeakersResource extends Resource
                 Tables\Columns\TextColumn::make('name_en'),
                 Tables\Columns\TextColumn::make('name_ar'),
                 Tables\Columns\TextColumn::make('name_ar'),
-                TextColumn::make('events_events.code')
-                ->label('Events')
-                ->limit(50),
+
             ])
             ->filters([
                 //
