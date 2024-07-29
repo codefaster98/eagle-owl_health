@@ -2,19 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EventsResource\RelationManagers\SpeakersSpeakersRelationManager;
-use App\Filament\Resources\SpeakersResource\RelationManagers\EventsEventsRelationManager;
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\SpeakersSpeakers;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Speakers\SpeakersSpeakersM;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SpeakersSpeakersResource\Pages;
 use App\Filament\Resources\SpeakersSpeakersResource\RelationManagers;
-use App\Models\Speakers\SpeakersSpeakersM;
-use App\Models\SpeakersSpeakers;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SpeakersResource\RelationManagers\EventsEventsRelationManager;
+use App\Filament\Resources\EventsResource\RelationManagers\SpeakersSpeakersRelationManager;
 
 class SpeakersSpeakersResource extends Resource
 {
@@ -27,8 +29,13 @@ class SpeakersSpeakersResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('events')
+                ->multiple()
+                ->relationship('events_events', 'code')
+                ->preload(),
             ]);
+
+
     }
 
     public static function table(Table $table): Table
@@ -40,7 +47,10 @@ class SpeakersSpeakersResource extends Resource
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('name_en'),
                 Tables\Columns\TextColumn::make('name_ar'),
-                Tables\Columns\TextColumn::make('name_ar'), 
+                Tables\Columns\TextColumn::make('name_ar'),
+                TextColumn::make('events_events.code')
+                ->label('Events')
+                ->limit(50),
             ])
             ->filters([
                 //

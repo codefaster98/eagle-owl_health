@@ -4,12 +4,13 @@ namespace App\Filament\Resources\EventsEventsResource\Pages;
 
 use Filament\Actions;
 use Filament\Forms\Form;
+use App\Models\Events\EventsEventsM;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\EventsEventsResource;
-use App\Models\Events\EventsEventsM;
 
 class CreateEventsEvents extends CreateRecord
 {
@@ -47,7 +48,11 @@ class CreateEventsEvents extends CreateRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
+                // TextColumn::make('speakers_speakers.code')
+                // ->label('Speakers')
+                // ->limit(50),
             ]);
+
     }
     static public function GenerateNewCode()
     {
