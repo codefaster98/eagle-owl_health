@@ -30,7 +30,6 @@ class EventsEventsM extends Model
     public function Speakers()
     {
         return $this->hasMany(EventsEventSpeakersM::class, "events_id", "id")->with(["Speaker"]);
-        // return $this->belongsToMany(SpeakersSpeakersM::class);
 
     }
 

@@ -28,9 +28,14 @@ class SpeakersSpeakersResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-              
-            ]);
+        ->schema([
+            // Forms\Components\TextInput::make('name')
+            //     ->required(),
+            // Forms\Components\Select::make('events')
+            //     ->multiple()
+            //     ->relationship('events', 'name')
+            //     ->preload(),
+        ]);
 
 
     }
@@ -45,6 +50,8 @@ class SpeakersSpeakersResource extends Resource
                 Tables\Columns\TextColumn::make('name_en'),
                 Tables\Columns\TextColumn::make('name_ar'),
                 Tables\Columns\TextColumn::make('name_ar'),
+                // Tables\Columns\TextColumn::make('code'),
+
 
             ])
             ->filters([

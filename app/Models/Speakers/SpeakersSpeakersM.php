@@ -34,6 +34,5 @@ class SpeakersSpeakersM extends Model
             'speakers_id',
             'events_id'
         );
-        // return $this->belongsToMany(EventsEventsM::class);
     }
 }
