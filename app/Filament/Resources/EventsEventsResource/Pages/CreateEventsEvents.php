@@ -5,6 +5,8 @@ namespace App\Filament\Resources\EventsEventsResource\Pages;
 use Filament\Actions;
 use Filament\Forms\Form;
 use App\Models\Events\EventsEventsM;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -48,7 +50,6 @@ class CreateEventsEvents extends CreateRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
-             
             ]);
 
     }
