@@ -4,6 +4,7 @@ namespace App\Services\users;
 
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Mail\users\VerifyCodeEmail;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,7 +29,7 @@ class UsersUsersServices
     }
     static public function Login($email, $password)
     {
-        $token = auth("api")->attempt([
+        $token =auth("api")->attempt([
             "email" => $email,
             "password" => $password,
         ]);
@@ -43,6 +44,8 @@ class UsersUsersServices
         return auth()->logout();
         return auth("api")->user();
         return auth("api")->logout();
+
+
 
     }
     static public function Verify($user_code, $otp_code)

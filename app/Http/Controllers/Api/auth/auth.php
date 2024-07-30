@@ -77,25 +77,27 @@ class auth extends Controller
     }
     public function Logout()
     {
+
         try {
-            // $logout = UsersUsersServices::Logout();
-            // dd($logout);
-            FacadesAuth::logout();
-            // dd(auth()->user());
-            if (auth()->logout()) {
-                return  SystemApiResponseServices::ReturnSuccess(
+
+            \Tymon\JWTAuth\Facades\JWTAuth::invalidate(\Tymon\JWTAuth\Facades\JWTAuth::getToken());
+            auth()->logout();
+            if (!auth()->check()) {
+                return SystemApiResponseServices::ReturnSuccess(
                     [],
                     __("return_messages.user_users.LogoutSucc"),
                     null
                 );
             } else {
-                return  SystemApiResponseServices::ReturnFailed(
+                return SystemApiResponseServices::ReturnFailed(
                     [],
                     __("return_messages.user_users.LogoutFailed"),
                     null
                 );
             }
+
         } catch (\Throwable $th) {
+            // التعامل مع الأخطاء وإرجاع رسالة خطأ مناسبة
             return SystemApiResponseServices::ReturnError(
                 9800,
                 null,
