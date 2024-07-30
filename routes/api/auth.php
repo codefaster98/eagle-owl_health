@@ -20,6 +20,7 @@ Route::name("api.auth.")
     ->controller(auth::class)
     ->group(function () {
         Route::post('/Logout', 'Logout')->name("Logout");
+        Route::post('/UpdateProfile', 'UpdateProfile')->name("UpdateProfile");
 
     });
 

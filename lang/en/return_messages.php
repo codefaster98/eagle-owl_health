@@ -6,6 +6,8 @@ return [
         "RegisterFailed" => "User Register Failed",
         "LoginSucc" => "User Login Successfuly",
         "LoginFailed" => "User Login Failed",
+        "UpdateSucc" => "User Update Successfuly",
+        "UpdateFailed" => "User Update Failed",
         "VerifySucc" => "User Verify Successfuly",
         "VerifyFailed" => "User Verify Failed",
         "LogoutSucc" => "User Logout Successfuly",

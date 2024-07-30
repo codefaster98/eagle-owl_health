@@ -12,7 +12,7 @@ use App\Services\system\SystemApiResponseServices;
 use App\Http\Requests\api\auth\AuthRegisterRequest;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
-
+use App\Http\Requests\api\auth\AuthUpdateRequest;
 
 class auth extends Controller
 {
@@ -124,6 +124,35 @@ class auth extends Controller
                 return  SystemApiResponseServices::ReturnFailed(
                     [],
                     __("return_messages.user_users.VerifyFailed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
+
+    public function UpdateProfile(AuthUpdateRequest $request)
+    {
+        try {
+            $user = DB::transaction(function () use ($request) {
+                return UsersUsersServices::UpdateProfile($request->validated());
+            });
+            // dd($user);
+            if ($user) {
+                return  SystemApiResponseServices::ReturnSuccess(
+                    ["user" => $user],
+                    __("return_messages.user_users.UpdateSucc"),
+                    null
+                );
+            } else {
+                return  SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.UpdateFailed"),
                     null
                 );
             }

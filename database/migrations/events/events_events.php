@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('title_ar');
             $table->text('short_desc_en');
             $table->text('short_desc_ar');
-            $table->text('long_desc_ar');
-            $table->string('long_desc_en');
+            $table->longText('long_desc_ar');
+            $table->longText('long_desc_en');
             $table->decimal('price');
             $table->string('date');
             $table->string('from_time');

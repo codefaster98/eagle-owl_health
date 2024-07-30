@@ -5,6 +5,7 @@ namespace App\Services\users;
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
 use App\Mail\users\VerifyCodeEmail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UsersUsersServices
@@ -67,4 +68,21 @@ class UsersUsersServices
             return false;
         }
     }
-}
+    static public function UpdateProfile(array $data)
+    {
+        // $user = UsersUsersM::update($data);
+        $user = auth()->user();
+        if (!$user) {
+            throw new \Exception('User not found.');
+        }
+        $user->update([
+            'fname' => $data['fname'],
+            'lname' => $data['lname'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'password' => isset($data['password']) ? bcrypt($data['password']) : $user->password,
+        ]);
+        return $user;
+    }
+    }
+
