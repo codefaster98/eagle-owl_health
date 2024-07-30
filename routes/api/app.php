@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\auth\auth;
-use App\Http\Controllers\api\members\members;
-use App\Http\Controllers\api\form\requestform;
+use App\Http\Controllers\Api\members\members;
 use App\Http\Controllers\Api\events\eventsevents;
 use App\Http\Controllers\api\form_request\form_request;
 use App\Http\Controllers\Api\memberships\memberships;
+
 // all routes without auth
 Route::name("api.app.")
     ->prefix("API/")
