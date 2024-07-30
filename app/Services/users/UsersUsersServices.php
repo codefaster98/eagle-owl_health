@@ -4,7 +4,6 @@ namespace App\Services\users;
 
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Mail\users\VerifyCodeEmail;
 use Illuminate\Support\Facades\Mail;
 

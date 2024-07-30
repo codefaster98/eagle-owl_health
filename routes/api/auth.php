@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\auth\auth;
-use App\Http\Controllers\api\members\members;
-use App\Http\Controllers\api\form\requestform;
-use App\Http\Controllers\Api\events\eventsevents;
 
 // without auth
 Route::name("api.auth.")
@@ -23,9 +20,10 @@ Route::name("api.auth.")
     ->controller(auth::class)
     ->group(function () {
         Route::post('/Logout', 'Logout')->name("Logout");
+
     });
 
-    
+
 
 
 
