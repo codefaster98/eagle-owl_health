@@ -34,7 +34,7 @@ class AuthRegisterRequest extends FormRequest
             "fname" => "required|string|max:20",
             "lname" => "required|string|max:20",
             "email" => "required|email|unique:users_users,email",
-            "phone" => "required|min_digits:11|max_digits:11",
+            "phone" => "required|min_digits:15|max_digits:15",
             "password" => "required|confirmed",
             "active" => "required|boolean",
             "deleted" => "required|boolean",
