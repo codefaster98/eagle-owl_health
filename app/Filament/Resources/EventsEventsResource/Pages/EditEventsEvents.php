@@ -36,6 +36,7 @@ class EditEventsEvents extends EditRecord
                 TextInput::make('title_en')->required()->label("English Title"),
                 TextInput::make('price')->numeric()->prefix('€')->maxValue(42949672.95)->required()->label("Price"),
                 TextInput::make('date')->required()->label("Date"),
+                TextInput::make('date_details')->required()->label("Date Details"),
                 TextInput::make('from_time')->required()->label("From_Time"),
                 TextInput::make('to_time')->required()->label("To_Time"),
                 TextInput::make('location')->required()->label("location"),

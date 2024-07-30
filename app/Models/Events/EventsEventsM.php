@@ -26,6 +26,7 @@ class EventsEventsM extends Model
         'from_time',
         'to_time',
         'location',
+        'date_details'
     ];
     public function Speakers()
     {

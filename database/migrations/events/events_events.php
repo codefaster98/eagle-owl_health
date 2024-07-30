@@ -26,6 +26,7 @@ return new class extends Migration
             $table->longText('long_desc_en');
             $table->decimal('price');
             $table->string('date');
+            $table->string('date_details');
             $table->string('from_time');
             $table->string('to_time');
             $table->string('location');
