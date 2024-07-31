@@ -33,5 +33,5 @@ class EventsEventsM extends Model
         return $this->hasMany(EventsEventSpeakersM::class, "events_id", "id")->with(["Speaker"]);
 
     }
-
+//Speakers
 }

@@ -4,10 +4,12 @@ namespace App\Filament\Resources\EventsEventsResource\Pages;
 
 use Filament\Actions;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
+use App\Models\Speakers\SpeakersSpeakersM;
 use App\Filament\Resources\EventsEventsResource;
 
 class EditEventsEvents extends EditRecord
@@ -45,6 +47,11 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
+                Select::make('speakers')
+                ->label('Speakers')
+                ->options(SpeakersSpeakersM::all()->pluck('code','id'))
+                ->searchable()
+                ->multiple(),
             ]);
     }
 }

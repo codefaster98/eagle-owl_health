@@ -31,14 +31,7 @@ class EventsEventsResource extends Resource
     public static function form(Form $form): Form
     {
                 return $form
-                ->schema([
-                    // Forms\Components\TextInput::make('code')
-                    //     ->required(),
-                    // Forms\Components\Select::make('speakers')
-                    //     ->multiple()
-                    //     ->relationship('speakers', 'code')
-                    //     ->preload(),
-                ]);
+                ->schema([]);
 
     }
 
@@ -51,7 +44,7 @@ class EventsEventsResource extends Resource
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('short_desc_en')->limit(50),
                 Tables\Columns\TextColumn::make('short_desc_ar')->limit(50),
-                // Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('Speakers'),
 
 
 

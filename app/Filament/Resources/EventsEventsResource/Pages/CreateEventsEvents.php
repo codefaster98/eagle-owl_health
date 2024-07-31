@@ -13,6 +13,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\EventsEventsResource;
+use App\Models\Events\EventsEventSpeakersM;
+use App\Models\Speakers\SpeakersSpeakersM;
 
 class CreateEventsEvents extends CreateRecord
 {
@@ -28,6 +30,10 @@ class CreateEventsEvents extends CreateRecord
         //         $data["list_en"][] = $data["list"][$key]["en"];
         //     }
         // }
+        // EventsEventSpeakersM::create([
+        //     'events_id',
+        //     'speakers_id',
+        // ]);
         // dd($data);
         return $data;
     }
@@ -48,8 +54,18 @@ class CreateEventsEvents extends CreateRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
-            ]);
+                Select::make('Speakers')
+                    ->label('Speakers')
+                    ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
+                    ->searchable()
+                    ->multiple(),
 
+            ]);
+    }
+    protected function afterSave(): void
+    {
+        dd($this->record);
+        // $this->record->categories()->syncWithoutDetaching([$this->options['categoryId']]);
     }
     static public function GenerateNewCode()
     {

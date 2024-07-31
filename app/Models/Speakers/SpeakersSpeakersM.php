@@ -3,6 +3,7 @@
 namespace App\Models\Speakers;
 
 use App\Models\Events\EventsEventsM;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

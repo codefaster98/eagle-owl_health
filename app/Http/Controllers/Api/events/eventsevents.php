@@ -34,7 +34,7 @@ class eventsevents extends Controller
             );
         }
     }
-    public function GetAllWithData(EventsEventsGetAllRequest $request)
+    public function GetAllData(EventsEventsGetAllRequest $request)
 {
     try {
         if ($request->random) {
@@ -62,6 +62,7 @@ class eventsevents extends Controller
     {
         try {
             $event[] = EventsEventsServices::GetByCode(["Speakers"], $request_code);
+            dd($event);
             if ($event) {
                 return SystemApiResponseServices::ReturnSuccess($event, null, null);
             } else {
