@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\members\members;
 use App\Http\Controllers\Api\events\eventsevents;
+use App\Http\Controllers\api\form_request\contact_form;
 use App\Http\Controllers\api\form_request\form_request;
 use App\Http\Controllers\Api\memberships\memberships;
 
@@ -41,6 +42,14 @@ Route::name("api.app.")
             ->controller(form_request::class)
             ->group(function () {
                 Route::post('Add', 'Add')->name("Add");
+            });
+        // form  Contact request routes
+
+        Route::name("form_contact.")
+            ->prefix("Form-Contact/")
+            ->controller(contact_form::class)
+            ->group(function () {
+                Route::post('Contact', 'Contact')->name("Contact");
             });
     });
 // all routes with auth

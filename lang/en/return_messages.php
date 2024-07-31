@@ -12,6 +12,8 @@ return [
         "VerifyFailed" => "User Verify Failed",
         "SendSucc" => "Code Send Successfuly",
         "SendFailed" => " Failed To Send",
+        "VerifyOTPSucc" => "OTP Successfuly",
+        "VerifyOTPFailed" => " Failed",
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
     ],

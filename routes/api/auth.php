@@ -22,6 +22,8 @@ Route::name("api.auth.")
         Route::post('/Logout', 'Logout')->name("Logout");
         Route::post('/UpdateProfile', 'UpdateProfile')->name("UpdateProfile");
         Route::post('/ForgetPassword', 'ForgetPassword')->name("ForgetPassword");
+        Route::post('/ValidateOTP', 'ValidateOTP')->name("ValidateOTP");
+        Route::post('/ResetPassword', 'ResetPassword')->name("ResetPassword");
 
     });
 

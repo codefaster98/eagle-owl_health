@@ -13,6 +13,7 @@ use App\Http\Requests\api\auth\AuthRegisterRequest;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
 use App\Http\Requests\api\auth\AuthUpdateRequest;
+use App\Http\Requests\api\auth\AuthValidateOtpRequest;
 
 class auth extends Controller
 {
@@ -46,35 +47,7 @@ class auth extends Controller
             );
         }
     }
-    public function ForgetPassword(AuthForgetPasswordRequest $request)
-    {
-        try {
-            $user = DB::transaction(function () use ($request) {
-                // add user to database
-                return UsersUsersServices::ForgetPassword($request->validated());
-            });
-            // return response
-            if ($user) {
-                return  SystemApiResponseServices::ReturnSuccess(
-                    [],
-                    __("return_messages.user_users.SendSucc"),
-                    null
-                );
-            } else {
-                return  SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.user_users.SendFailed"),
-                    null
-                );
-            }
-        } catch (\Throwable $th) {
-            return SystemApiResponseServices::ReturnError(
-                9800,
-                null,
-                $th->getMessage(),
-            );
-        }
-    }
+
     public function Login(AuthLoginRequest $request)
     {
         try {
@@ -104,6 +77,37 @@ class auth extends Controller
             );
         }
     }
+
+    public function Verify(AuthVerifyRequest $request)
+    {
+        try {
+            $token = DB::transaction(function () use ($request) {
+                // add user to database
+                return UsersUsersServices::Verify($request->user_code, $request->otp);
+            });
+            // return response
+            if ($token) {
+                return  SystemApiResponseServices::ReturnSuccess(
+                    [],
+                    __("return_messages.user_users.VerifySucc"),
+                    null
+                );
+            } else {
+                return  SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.VerifyFailed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
+
     public function Logout()
     {
 
@@ -135,35 +139,6 @@ class auth extends Controller
         }
 
     }
-    public function Verify(AuthVerifyRequest $request)
-    {
-        try {
-            $token = DB::transaction(function () use ($request) {
-                // add user to database
-                return UsersUsersServices::Verify($request->user_code, $request->otp);
-            });
-            // return response
-            if ($token) {
-                return  SystemApiResponseServices::ReturnSuccess(
-                    [],
-                    __("return_messages.user_users.VerifySucc"),
-                    null
-                );
-            } else {
-                return  SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.user_users.VerifyFailed"),
-                    null
-                );
-            }
-        } catch (\Throwable $th) {
-            return SystemApiResponseServices::ReturnError(
-                9800,
-                null,
-                $th->getMessage(),
-            );
-        }
-    }
 
     public function UpdateProfile(AuthUpdateRequest $request)
     {
@@ -193,4 +168,65 @@ class auth extends Controller
             );
         }
     }
+
+    public function ForgetPassword(AuthForgetPasswordRequest $request)
+    {
+        try {
+            $user = DB::transaction(function () use ($request) {
+                // add user to database
+                return UsersUsersServices::ForgetPassword($request->validated());
+            });
+            // return response
+            if ($user) {
+                return  SystemApiResponseServices::ReturnSuccess(
+                    [],
+                    __("return_messages.user_users.SendSucc"),
+                    null
+                );
+            } else {
+                return  SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.SendFailed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
+
+    public function ValidateOTP(AuthValidateOtpRequest $request)
+    {
+        try {
+            $token = DB::transaction(function () use ($request) {
+                // add user to database
+                return UsersUsersServices::ValidateOTP($request->user_code, $request->otp);
+            });
+            // return response
+            if ($token) {
+                return  SystemApiResponseServices::ReturnSuccess(
+                    [],
+                    __("return_messages.user_users.VerifySucc"),
+                    null
+                );
+            } else {
+                return  SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.VerifyFailed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
+    
 }

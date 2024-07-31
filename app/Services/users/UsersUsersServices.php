@@ -20,6 +20,7 @@ class UsersUsersServices
             return $code;
         }
     }
+
     static public function Register(array $data)
     {
         // add user in database
@@ -28,9 +29,10 @@ class UsersUsersServices
         Mail::to($user->email)->send(new VerifyCodeEmail($user->otp));
         return $user;
     }
+
     static public function Login($email, $password)
     {
-        $token =auth("api")->attempt([
+        $token = auth("api")->attempt([
             "email" => $email,
             "password" => $password,
         ]);
@@ -40,15 +42,7 @@ class UsersUsersServices
         ];
         return $token ? $data : null;
     }
-    static public function Logout()
-    {
-        return auth()->logout();
-        return auth("api")->user();
-        return auth("api")->logout();
 
-
-
-    }
     static public function Verify($user_code, $otp_code)
     {
         // check if $user_code and $otp_code exists
@@ -69,6 +63,14 @@ class UsersUsersServices
             return false;
         }
     }
+
+    static public function Logout()
+    {
+        return auth()->logout();
+        return auth("api")->user();
+        return auth("api")->logout();
+    }
+
     static public function UpdateProfile(array $data)
     {
         // $user = UsersUsersM::update($data);
@@ -85,6 +87,7 @@ class UsersUsersServices
         ]);
         return $user;
     }
+
     static public function ForgetPassword($email)
     {
         $user = UsersUsersM::where('email', $email)->first();
@@ -94,5 +97,29 @@ class UsersUsersServices
         Mail::to($user->email)->send(new ResetPasswordCode($otp));
         return $user;
     }
+
+    static public function ValidateOTP($user_code, $otp_code)
+    {
+        $user = UsersUsersM::where([
+            "code" => $user_code,
+            "otp" => $otp_code,
+        ])->first();
+        if ($user) {
+            // set active = true
+            $user->active = true;
+            // set otp = null
+            $user->otp = null;
+            // save user
+            $user->save();
+            // return true
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    static public function ResetPassword()
+    {
+
+    }
+}
