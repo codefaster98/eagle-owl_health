@@ -2,12 +2,13 @@
 
 namespace App\Services\users;
 
-use App\Mail\users\ResetPasswordCode;
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
 use App\Mail\users\VerifyCodeEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\users\ResetPasswordCode;
+use Illuminate\Support\Facades\Password;
 
 class UsersUsersServices
 {
@@ -93,6 +94,7 @@ class UsersUsersServices
         $user = UsersUsersM::where('email', $email)->first();
         $otp = rand(100000, 999999);
         $user->otp = $otp;
+        $user->active=false;
         $user->save();
         Mail::to($user->email)->send(new ResetPasswordCode($otp));
         return $user;
@@ -118,8 +120,17 @@ class UsersUsersServices
         }
     }
 
-    static public function ResetPassword()
+    static public function ResetPassword(array $data)
     {
-
+        //get user
+        $user = UsersUsersM::where('email', $data['email'])->first();
+        if ($user) {
+            $user->update([
+                'password' => $data['password'],
+                $user->active=true,
+                $user->save()
+            ]);
+            return $user;
+        }
     }
 }

@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\members\members;
 use App\Http\Controllers\Api\events\eventsevents;
-use App\Http\Controllers\api\form_request\contact_form;
-use App\Http\Controllers\api\form_request\form_request;
+use App\Http\Controllers\Api\form_request\contact_form;
+use App\Http\Controllers\Api\form_request\form_request;
 use App\Http\Controllers\Api\memberships\memberships;
 
 // all routes without auth

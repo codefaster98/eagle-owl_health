@@ -10,8 +10,8 @@ use App\Http\Requests\api\auth\AuthLoginRequest;
 use App\Http\Requests\api\auth\AuthVerifyRequest;
 use App\Services\system\SystemApiResponseServices;
 use App\Http\Requests\api\auth\AuthRegisterRequest;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
+use App\Http\Requests\api\auth\AuthResetPasswordRequest;
 use App\Http\Requests\api\auth\AuthUpdateRequest;
 use App\Http\Requests\api\auth\AuthValidateOtpRequest;
 
@@ -228,5 +228,35 @@ class auth extends Controller
             );
         }
     }
-    
+
+     static public function ResetPassword(AuthResetPasswordRequest $request)
+    {
+        try {
+            $user = DB::transaction(function () use ($request) {
+                // add user to database
+                return UsersUsersServices::ResetPassword($request->validated());
+            });
+            // return response
+            if ($user) {
+                return  SystemApiResponseServices::ReturnSuccess(
+                    [],
+                    __("return_messages.user_users.ResetSucc"),
+                    null
+                );
+            } else {
+                return  SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.ResetFailed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
+
 }

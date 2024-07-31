@@ -14,6 +14,8 @@ return [
         "SendFailed" => " Failed To Send",
         "VerifyOTPSucc" => "OTP Successfuly",
         "VerifyOTPFailed" => " Failed",
+        "ResetSucc" => "Password Reset Successfuly",
+        "ResetFailed" => "Reset Password Failed",
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
     ],

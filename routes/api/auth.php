@@ -12,6 +12,8 @@ Route::name("api.auth.")
         Route::post('/Register', 'Register')->name("Register");
         Route::post('/Login', 'Login')->name("Login");
         Route::post('/Verify', 'Verify')->name("Verify");
+        Route::post('/ResetPassword', 'ResetPassword')->name("ResetPassword");
+
     });
 // with auth
 Route::name("api.auth.")
@@ -23,7 +25,7 @@ Route::name("api.auth.")
         Route::post('/UpdateProfile', 'UpdateProfile')->name("UpdateProfile");
         Route::post('/ForgetPassword', 'ForgetPassword')->name("ForgetPassword");
         Route::post('/ValidateOTP', 'ValidateOTP')->name("ValidateOTP");
-        Route::post('/ResetPassword', 'ResetPassword')->name("ResetPassword");
+
 
     });
 
