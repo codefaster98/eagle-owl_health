@@ -30,6 +30,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\cors::class,
+            // $middleware->append(EnsureTokenIsValid::class)
+
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             // check if admin is auth
         ]);
