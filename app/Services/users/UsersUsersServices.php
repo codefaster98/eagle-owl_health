@@ -2,6 +2,7 @@
 
 namespace App\Services\users;
 
+use App\Mail\users\ResetPasswordCode;
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
 use App\Mail\users\VerifyCodeEmail;
@@ -82,6 +83,15 @@ class UsersUsersServices
             'phone' => $data['phone'],
             'password' => isset($data['password']) ? bcrypt($data['password']) : $user->password,
         ]);
+        return $user;
+    }
+    static public function ForgetPassword($email)
+    {
+        $user = UsersUsersM::where('email', $email)->first();
+        $otp = rand(100000, 999999);
+        $user->otp = $otp;
+        $user->save();
+        Mail::to($user->email)->send(new ResetPasswordCode($otp));
         return $user;
     }
     }

@@ -10,6 +10,8 @@ return [
         "UpdateFailed" => "User Update Failed",
         "VerifySucc" => "User Verify Successfuly",
         "VerifyFailed" => "User Verify Failed",
+        "SendSucc" => "Code Send Successfuly",
+        "SendFailed" => " Failed To Send",
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
     ],

@@ -46,6 +46,35 @@ class auth extends Controller
             );
         }
     }
+    public function ForgetPassword(AuthForgetPasswordRequest $request)
+    {
+        try {
+            $user = DB::transaction(function () use ($request) {
+                // add user to database
+                return UsersUsersServices::ForgetPassword($request->validated());
+            });
+            // return response
+            if ($user) {
+                return  SystemApiResponseServices::ReturnSuccess(
+                    [],
+                    __("return_messages.user_users.SendSucc"),
+                    null
+                );
+            } else {
+                return  SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.SendFailed"),
+                    null
+                );
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
     public function Login(AuthLoginRequest $request)
     {
         try {

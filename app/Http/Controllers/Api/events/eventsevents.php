@@ -34,6 +34,30 @@ class eventsevents extends Controller
             );
         }
     }
+    public function GetAllWithData(EventsEventsGetAllRequest $request)
+{
+    try {
+        if ($request->random) {
+            $events = EventsEventsServices::GetAllWithLimitAndRandom(null, $request->limit);
+        } else if ($request->has('date') && !is_null($request->date)) {
+            $events = EventsEventsServices::GetAllWithLimitAndLike(null, $request->limit, $request->date);
+        } else {
+            $events = EventsEventsServices::GetAllWithLimit(null, $request->limit);
+        }
+
+        if (count($events) > 0) {
+            return SystemApiResponseServices::ReturnSuccess($events, null, null);
+        } else {
+            return SystemApiResponseServices::ReturnFailed([], __("return_messages.events_events.NotFound"), null);
+        }
+    } catch (\Throwable $th) {
+        return SystemApiResponseServices::ReturnError(
+            9800,
+            null,
+            $th->getMessage(),
+        );
+    }
+}
     public function Details($request_code)
     {
         try {

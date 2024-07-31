@@ -21,6 +21,7 @@ Route::name("api.auth.")
     ->group(function () {
         Route::post('/Logout', 'Logout')->name("Logout");
         Route::post('/UpdateProfile', 'UpdateProfile')->name("UpdateProfile");
+        Route::post('/ForgetPassword', 'ForgetPassword')->name("ForgetPassword");
 
     });
 

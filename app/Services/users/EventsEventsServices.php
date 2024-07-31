@@ -23,6 +23,14 @@ class EventsEventsServices
             return EventsEventsM::inRandomOrder()->limit($limit)->get();
         }
     }
+    static public function GetAllWithLimitAndLike(array|null $Relations, int $limit, string $date)
+    {
+        if ($Relations) {
+            return EventsEventsM::where('date_details', 'like', $date)->limit($limit)->with($Relations)->get();
+        } else {
+            return EventsEventsM::where('date_details', 'like', $date)->limit($limit)->get();
+        }
+    }
     static public function GetByCode(array|null $Relations, $event_code)
     {
         if ($Relations) {

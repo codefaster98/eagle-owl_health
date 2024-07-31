@@ -109,14 +109,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="fw-medium text-center">Login</h2>
+                    {{-- <h2 class="fw-medium text-center">Login</h2> --}}
                     <h2 class="fw-bold text-center">This is your OTP</h2>
                     <div class="hstack col-md-6 mx-auto gap-3 justify-content-center">
                         @foreach ($code_array as $item)
                         <div class="p-2">
                             <div class="form-control text-center">{{ $item }}</div>
                         </div>
-                        @endforeach 
+                        @endforeach
 
                     </div>
                 </div>

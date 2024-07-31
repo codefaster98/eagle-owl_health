@@ -26,6 +26,7 @@ class EventsEventsGetAllRequest extends FormRequest
         return [
             'limit' => "required|integer",
             'random' => "required|boolean",
+            'date' => 'sometimes|string',
         ];
     }
     public function attributes(): array
