@@ -2,23 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\EventsEvents;
 use Filament\Resources\Resource;
 use App\Models\Events\EventsEventsM;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\EventsEventsResource\Pages;
-use App\Filament\Resources\EventsEventsResource\RelationManagers;
-use App\Filament\Resources\EventsResource\RelationManagers\SpeakersSpeakersRelationManager;
-
-use function Laravel\Prompts\select;
 
 class EventsEventsResource extends Resource
 {
@@ -44,7 +33,7 @@ class EventsEventsResource extends Resource
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('short_desc_en')->limit(50),
                 Tables\Columns\TextColumn::make('short_desc_ar')->limit(50),
-                Tables\Columns\TextColumn::make('Speakers'),
+                Tables\Columns\TextColumn::make('Speakers.code')->label('Speakers'),
 
 
 

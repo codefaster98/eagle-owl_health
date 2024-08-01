@@ -17,6 +17,8 @@ class EventsEventSpeakersM extends Model
     ];
     public function Speaker()
     {
-        return $this->hasOne(SpeakersSpeakersM::class, "id", "speakers_id");
+        // return $this->hasOne(SpeakersSpeakersM::class, "id", "speakers_id");
+        return $this->belongsTo(SpeakersSpeakersM::class, 'speakers_id');
+
     }
 }

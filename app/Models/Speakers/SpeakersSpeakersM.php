@@ -31,7 +31,7 @@ class SpeakersSpeakersM extends Model
     {
         $this->belongsToMany(
             EventsEventsM::class,
-            'event_speakers',
+            'events_event_speakers',
             'speakers_id',
             'events_id'
         );

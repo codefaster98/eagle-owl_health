@@ -30,7 +30,7 @@ class CreateEventsEvents extends CreateRecord
         //         $data["list_en"][] = $data["list"][$key]["en"];
         //     }
         // }
-        // EventsEventSpeakersM::create([
+        // $data=EventsEventSpeakersM::create([
         //     'events_id',
         //     'speakers_id',
         // ]);
@@ -53,8 +53,6 @@ class CreateEventsEvents extends CreateRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('img')->directory('Events_Sponsors')->required()->label("Image"),
-
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
                 Select::make('Speakers')
                     ->label('Speakers')
