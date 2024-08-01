@@ -19,7 +19,7 @@ Route::name("api.app.")
             ->group(function () {
                 Route::get('All', 'GetAll')->name("GetAll");
                 Route::get('{code}/Details', 'Details')->name("Details");
-                Route::get('GetAllData', 'GetAllData')->name("GetAllData");
+                Route::post('GetAllWithData', 'GetAllWithData')->name("GetAllWithData");
             });
         // members routes
         Route::name("members.")
@@ -52,19 +52,3 @@ Route::name("api.app.")
                 Route::post('Contact', 'Contact')->name("Contact");
             });
     });
-// all routes with auth
-
-Route::name("api.app.")
-    ->prefix("API/")
-    ->middleware(['api_with_auth'])
-    ->group(function () {
-        // events routes
-        Route::name("events.")
-            ->prefix("Events/")
-            ->controller(eventsevents::class)
-            ->group(function () {
-                Route::get('{code}/Details', 'Details')->name("Details");
-                Route::post('GetAllWithData', 'GetAllWithData')->name("GetAllWithData");
-            });
-    });
-
