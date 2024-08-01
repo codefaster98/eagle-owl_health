@@ -24,7 +24,7 @@ class AuthResetPasswordRequest extends FormRequest
         return [
             'password' => 'required|confirmed',
             "email" => "required|email|exists:users_users,email",
-            // 'otp' => 'required|string',
+            'otp' => 'required|string',
         ];
     }
 

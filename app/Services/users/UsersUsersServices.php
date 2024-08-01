@@ -126,7 +126,7 @@ class UsersUsersServices
         $user = UsersUsersM::where(
             'email', $data['email']
             )->first();
-        if ($user) {
+        if ($user && $user->otp == $data['otp']) {
             $user->update([
                 'password' => $data['password'],
 

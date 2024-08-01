@@ -34,14 +34,14 @@ class EventsEventsM extends Model
     //     ->with(["Speaker"]);
 
     // }
-    public function speakers()
+    public function Speakers()
     {
         return $this->belongsToMany(
             SpeakersSpeakersM::class,
-            'events_event_speakers',
+           'events_event_speakers',
             'events_id',
             'speakers_id'
         );
     }
-//Speakers
+
 }
