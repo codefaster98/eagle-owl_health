@@ -123,10 +123,13 @@ class UsersUsersServices
     static public function ResetPassword(array $data)
     {
         //get user
-        $user = UsersUsersM::where('email', $data['email'])->first();
+        $user = UsersUsersM::where(
+            'email', $data['email']
+            )->first();
         if ($user) {
             $user->update([
                 'password' => $data['password'],
+
                 $user->active=true,
                 $user->save()
             ]);
