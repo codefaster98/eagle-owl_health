@@ -62,7 +62,7 @@ class eventsevents extends Controller
     {
         try {
             $event[] = EventsEventsServices::GetByCode(["Speakers"], $request_code);
-            dd($event);
+            // dd($event);
             if ($event) {
                 return SystemApiResponseServices::ReturnSuccess($event, null, null);
             } else {
