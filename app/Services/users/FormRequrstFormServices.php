@@ -2,7 +2,9 @@
 
 namespace App\Services\users;
 
+use App\Mail\users\VerifyCodeEmail;
 use App\Models\Form\FormRequestFormM;
+use Filament\Notifications\Notification;
 
 class FormRequrstFormServices
 {
@@ -11,7 +13,10 @@ class FormRequrstFormServices
         // add request in database
         $user = FormRequestFormM::create($data);
         // send message to admin
-        // Mail::to($user->email)->send(new VerifyCodeEmail($user->otp));
+        Notification::make()
+            ->title('New Form Request')
+            ->body("A new Message Send: {$user->message}")
+            ->sendTo('bhry@bhry.local');
         return $user;
     }
 }

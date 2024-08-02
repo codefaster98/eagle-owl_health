@@ -6,10 +6,12 @@ use Filament\Actions;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
 use App\Models\Speakers\SpeakersSpeakersM;
+use App\Models\Events\EventsEventSpeakersM;
 use App\Filament\Resources\EventsEventsResource;
 
 class EditEventsEvents extends EditRecord
@@ -30,6 +32,21 @@ class EditEventsEvents extends EditRecord
     {
         return $data;
     }
+    protected function handleRecordCreation(array $data): Model
+    {
+        // dd($data);
+        //insert the main record
+        $record =  static::getModel()::create($data);
+        foreach ($data["events_speakers"] ?? [] as $events_speaker) {
+            // Create a relation
+            $event_speaker = new EventsEventSpeakersM();
+            $event_speaker->speaker_id = $events_speaker;
+            $event_speaker->event_id = $record->id;
+            // Save the relation data
+            $event_speaker->save();
+        }
+        return $record;
+    }
     public function form(Form $form): Form
     {
         return $form
@@ -47,11 +64,11 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
-                Select::make('speakers')
-                ->label('Speakers')
-                ->options(SpeakersSpeakersM::all()->pluck('code','id'))
-                ->searchable()
-                ->multiple(),
+                // Select::make('speakers')
+                // ->label('Speakers')
+                // ->options(SpeakersSpeakersM::all()->pluck('code','id'))
+                // ->searchable()
+                // ->multiple(),
             ]);
     }
 }
