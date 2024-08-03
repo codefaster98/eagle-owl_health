@@ -10,6 +10,7 @@ class EventsEventSpeakersM extends Model
 {
     use HasFactory;
     protected $table = "events_event_speakers";
+    public $timestamps = false;
 
     protected $fillable = [
         'events_id',

@@ -9,12 +9,13 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
-use Filament\Resources\Pages\CreateRecord;
-use App\Filament\Resources\EventsEventsResource;
-use App\Models\Events\EventsEventSpeakersM;
 use App\Models\Speakers\SpeakersSpeakersM;
+use Filament\Resources\Pages\CreateRecord;
+use App\Models\Events\EventsEventSpeakersM;
+use App\Filament\Resources\EventsEventsResource;
 
 class CreateEventsEvents extends CreateRecord
 {
@@ -61,6 +62,23 @@ class CreateEventsEvents extends CreateRecord
                     ->multiple(),
 
             ]);
+    }
+    protected function handleRecordCreation(array $data): Model
+    {
+        // dd($data);
+        //insert the main record
+        $record =  static::getModel()::create($data);
+        foreach ($data["Speakers"] ?? [] as $Speaker) {
+            // Create a relation
+            $event_speaker = new EventsEventSpeakersM();
+            $event_speaker->speakers_id = $Speaker;
+            $event_speaker->events_id = $record->id;
+            // Save the relation data
+            $event_speaker->save();
+        }
+        return $record;
+
+
     }
     protected function afterSave(): void
     {
