@@ -60,19 +60,10 @@ class EditEventsEvents extends EditRecord
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
 
-        // $record->update($data);
-        // $record->Speakers()->detach();
-        // foreach ($data["Speakers"] ?? [] as $Speaker) {
-        //     $event_speaker = new EventsEventSpeakersM();
-        //     $event_speaker->speakers_id = $Speaker;
-        //     $event_speaker->events_id = $record->id;
-        //     $event_speaker->save();
-        // }
+
 
         // return $record;
         $record->update($data);
-
-        // تحديث العلاقات
         $record->speakers()->sync($data['speakers'] ?? []);
 
         return $record;
