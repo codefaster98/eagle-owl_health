@@ -72,7 +72,7 @@ class FormRequestFormMResource extends Resource
     {
         return [
             'index' => Pages\ListFormRequestFormMS::route('/'),
-            'create' => Pages\CreateFormRequestFormM::route('/create'),
+            // 'create' => Pages\CreateFormRequestFormM::route('/create'),
             // 'edit' => Pages\EditFormRequestFormM::route('/{record}/edit'),
         ];
     }
