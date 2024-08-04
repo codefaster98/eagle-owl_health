@@ -16,7 +16,7 @@ use App\Filament\Resources\FormRequestFormMResource\RelationManagers;
 class FormRequestFormMResource extends Resource
 {
     protected static ?string $model = FormRequestFormM::class;
-    protected static ?string $modelLabel = "Notification";
+    protected static ?string $modelLabel = "RequestNotification";
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
