@@ -18,6 +18,8 @@ return [
         "ResetFailed" => "Reset Password Failed",
         "LogoutSucc" => "User Logout Successfuly",
         "LogoutFailed" => "User Logout Failed",
+        "UserDeletedSuccessfully" => "UserDeletedSuccessfully",
+        "UserNotFound" => "UserNotFound",
     ],
     "form_request" => [
         "AddSucc" => "Message Send Successfuly",

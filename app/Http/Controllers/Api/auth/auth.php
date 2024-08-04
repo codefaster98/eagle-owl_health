@@ -258,5 +258,36 @@ class auth extends Controller
             );
         }
     }
+     static public function deleteUser($user_code)
+    {
+        try {
+            $user = DB::transaction(function () use($user_code) {
+                // add user to database
+                return  UsersUsersServices::deleteUser($user_code);
+            });
 
+            if ($user) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('return_messages.user_users.UserDeletedSuccessfully')
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => __('return_messages.user_users.UserNotFound')
+                ], 404);
+            }
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
+            );
+        }
+    }
 }
+
+
+
+
+

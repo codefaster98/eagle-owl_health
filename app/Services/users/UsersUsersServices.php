@@ -5,10 +5,9 @@ namespace App\Services\users;
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
 use App\Mail\users\VerifyCodeEmail;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\users\ResetPasswordCode;
-use Illuminate\Support\Facades\Password;
 
 class UsersUsersServices
 {
@@ -136,4 +135,19 @@ class UsersUsersServices
             return $user;
         }
     }
+
+    static public function deleteUser($user_code)
+    {
+
+        $user = UsersUsersM::where('code', $user_code)->first();
+
+        if ($user) {
+
+            $user->delete();
+            return true;
+        }
+
+        return false;
+    }
+
 }
