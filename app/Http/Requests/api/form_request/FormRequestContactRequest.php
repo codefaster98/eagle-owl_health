@@ -23,7 +23,7 @@ class FormRequestContactRequest extends FormRequest
         return [
             'fname' => "required|min:3|max:25",
             'lname' => "required|min:3|max:25",
-            'phone' => "required|numeric|max_digits:15",
+            "phone" => "required|min_digits:11|max_digits:15",
             'email' => "required|email",
             'message' => "required|min:10|max:250",
         ];
