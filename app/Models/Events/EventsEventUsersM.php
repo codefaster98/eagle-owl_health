@@ -17,4 +17,9 @@ class EventsEventUsersM extends Model
         'payment_details',
         'time',
     ];
+    public function Event()
+    {
+        return $this->belongsTo(EventsEventsM::class, 'events_id');
+
+    }
 }

@@ -29,15 +29,7 @@ class EventsEventsM extends Model
         'location',
         'date_details'
     ];
-    public function Speakers()
-    {
-        return $this->belongsToMany(
-            SpeakersSpeakersM::class,
-           'events_event_speakers',
-            'events_id',
-            'speakers_id'
-        );
-    }
+
     public function users()
     {
         return $this->belongsToMany(
@@ -47,5 +39,13 @@ class EventsEventsM extends Model
             'users_id'
     );
     }
-
+    public function Speakers()
+    {
+        return $this->belongsToMany(
+            SpeakersSpeakersM::class,
+           'events_event_speakers',
+            'events_id',
+            'speakers_id'
+        );
+    }
 }
