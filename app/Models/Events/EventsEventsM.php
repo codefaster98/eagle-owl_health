@@ -28,12 +28,6 @@ class EventsEventsM extends Model
         'location',
         'date_details'
     ];
-    // public function Speakers()
-    // {
-    //     return $this->hasMany(EventsEventSpeakersM::class, "events_id", "id")
-    //     ->with(["Speaker"]);
-
-    // }
     public function Speakers()
     {
         return $this->belongsToMany(

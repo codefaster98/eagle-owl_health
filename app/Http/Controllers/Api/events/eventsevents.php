@@ -34,7 +34,7 @@ class eventsevents extends Controller
             );
         }
     }
-    public function GetAllData(EventsEventsGetAllRequest $request)
+    public function GetAllWithData(EventsEventsGetAllRequest $request)
 {
     try {
         if ($request->random) {
