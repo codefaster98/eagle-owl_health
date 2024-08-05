@@ -3,6 +3,7 @@
 namespace App\Models\Events;
 
 use App\Models\Speakers\SpeakersSpeakersM;
+use App\Models\Users\UsersUsersM;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,6 +37,15 @@ class EventsEventsM extends Model
             'events_id',
             'speakers_id'
         );
+    }
+    public function users()
+    {
+        return $this->belongsToMany(
+            UsersUsersM::class,
+            'events_event_users',
+            'events_id',
+            'users_id'
+    );
     }
 
 }

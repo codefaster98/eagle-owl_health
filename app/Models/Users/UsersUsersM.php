@@ -2,8 +2,9 @@
 
 namespace App\Models\Users;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Events\EventsEventsM;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class UsersUsersM extends Authenticatable  implements JWTSubject
 {
@@ -31,6 +32,15 @@ class UsersUsersM extends Authenticatable  implements JWTSubject
         'deleted',
         'password',
     ];
+    public function events()
+    {
+        return $this->belongsToMany(
+            EventsEventsM::class,
+            'events_event_users',
+            'events_id',
+            'users_id'
+    );
+    }
     protected function casts(): array
     {
         return [
