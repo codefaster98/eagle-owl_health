@@ -5,7 +5,6 @@ namespace App\Services\users;
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
 use App\Mail\users\VerifyCodeEmail;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\users\ResetPasswordCode;
 
@@ -30,19 +29,6 @@ class UsersUsersServices
         return $user;
     }
 
-    static public function Login($email, $password)
-    {
-        $token = auth("api")->attempt([
-            "email" => $email,
-            "password" => $password,
-        ]);
-        $data = [
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ];
-        return $token ? $data : null;
-    }
-
     static public function Verify($user_code, $otp_code)
     {
         // check if $user_code and $otp_code exists
@@ -62,6 +48,33 @@ class UsersUsersServices
         } else {
             return false;
         }
+    }
+
+    static public function ResendOtp($email)
+    {
+        $user = UsersUsersM::where("email", $email)->first();
+
+        if ($user) {
+            $newOtp = rand(100000, 999999);
+            $user->otp = $newOtp;
+            $user->save();
+            Mail::to($user->email)->send(new VerifyCodeEmail($newOtp));
+            return $user;
+        } else {
+            return false;
+        }
+    }
+    static public function Login($email, $password)
+    {
+        $token = auth("api")->attempt([
+            "email" => $email,
+            "password" => $password,
+        ]);
+        $data = [
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ];
+        return $token ? $data : null;
     }
 
     static public function Logout()

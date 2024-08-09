@@ -20,6 +20,8 @@ return [
         "LogoutFailed" => "User Logout Failed",
         "UserDeletedSuccessfully" => "UserDeletedSuccessfully",
         "UserNotFound" => "UserNotFound",
+        "ResendOtpSucc" => "Otp Send Successfuly",
+        "UserNotFound" => "UserNotFound",
     ],
     "form_request" => [
         "AddSucc" => "Message Send Successfuly",

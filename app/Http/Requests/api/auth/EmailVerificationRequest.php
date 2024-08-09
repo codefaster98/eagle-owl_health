@@ -4,7 +4,7 @@ namespace App\Http\Requests\api\auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthVerifyRequest extends FormRequest
+class EmailVerificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,7 @@ class AuthVerifyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "user_code" => "required|exists:users_users,code",
-            "otp" => "required|numeric|min_digits:6|max_digits:6|exists:users_users,otp",
+            "email" => "required|email|exists:users_users,email",
         ];
     }
 

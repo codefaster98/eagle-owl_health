@@ -2,13 +2,10 @@
 
 namespace App\Filament\Resources\EventsEventsResource\Pages;
 
-use Filament\Actions;
 use Filament\Forms\Form;
 use App\Models\Events\EventsEventsM;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
@@ -23,18 +20,6 @@ class CreateEventsEvents extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['code'] = Self::GenerateNewCode();
-        // foreach ($data["list"] ?? [] as $key => $val) {
-        //     if ($data["list"][$key]["ar"]) {
-        //         $data["list_ar"][] = $data["list"][$key]["ar"];
-        //     }
-        //     if ($data["list"][$key]["en"]) {
-        //         $data["list_en"][] = $data["list"][$key]["en"];
-        //     }
-        // }
-        // $data=EventsEventSpeakersM::create([
-        //     'events_id',
-        //     'speakers_id',
-        // ]);
         // dd($data);
         return $data;
     }
@@ -83,7 +68,6 @@ class CreateEventsEvents extends CreateRecord
     protected function afterSave(): void
     {
         dd($this->record);
-        // $this->record->categories()->syncWithoutDetaching([$this->options['categoryId']]);
     }
     static public function GenerateNewCode()
     {
