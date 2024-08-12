@@ -29,7 +29,7 @@ class AuthUpdateRequest extends FormRequest
             "lname" => "required|string|max:20",
             "email" => "required|email",
             "phone" => "required|min_digits:15|max_digits:15",
-            "password" => "required",
+            "password" => "nullable|required",
         ];
     }
 

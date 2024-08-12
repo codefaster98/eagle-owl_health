@@ -27,8 +27,7 @@ Route::name("api.auth.")
         Route::post('/Logout', 'Logout')->name("Logout");
         Route::post('{code}/deleteUser', 'deleteUser')->name("deleteUser");
         Route::post('/UpdateProfile', 'UpdateProfile')->name("UpdateProfile");
-
-
+        Route::get('/UserInfo', 'getUserInfo')->name("UserInfo");
     });
 
 

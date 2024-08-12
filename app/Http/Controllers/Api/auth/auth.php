@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\auth;
 
+use Illuminate\Http\Request;
+use App\Models\Users\UsersUsersM;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\users\UsersUsersServices;
@@ -12,9 +14,8 @@ use App\Services\system\SystemApiResponseServices;
 use App\Http\Requests\api\auth\AuthRegisterRequest;
 use App\Http\Requests\api\auth\AuthValidateOtpRequest;
 use App\Http\Requests\api\auth\AuthResetPasswordRequest;
-use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
 use App\Http\Requests\api\auth\EmailVerificationRequest;
-use App\Models\Users\UsersUsersM;
+use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
 
 class auth extends Controller
 {
@@ -51,7 +52,7 @@ class auth extends Controller
 
     public function Login(AuthLoginRequest $request)
     {
-       
+
         try {
             $data = DB::transaction(function () use ($request) {
 
@@ -189,7 +190,7 @@ class auth extends Controller
             $user = DB::transaction(function () use ($request) {
                 return UsersUsersServices::UpdateProfile($request->validated());
             });
-            // dd($user);
+            dd($user);
             if ($user) {
                 return  SystemApiResponseServices::ReturnSuccess(
                     ["user" => $user],
@@ -203,6 +204,7 @@ class auth extends Controller
                     null
                 );
             }
+
         } catch (\Throwable $th) {
             return SystemApiResponseServices::ReturnError(
                 9800,
@@ -247,7 +249,7 @@ class auth extends Controller
         try {
             $token = DB::transaction(function () use ($request) {
                 // add user to database
-                return UsersUsersServices::ValidateOTP( $request->otp);
+                return UsersUsersServices::ValidateOTP($request->otp);
             });
             // return response
             if ($token) {
@@ -279,10 +281,10 @@ class auth extends Controller
                 // dd($request);
                 // add user to database
                 // $validatedData = $request->validated();
-// dd($validatedData);
+                // dd($validatedData);
                 return UsersUsersServices::ResetPassword($request->validated());
             });
-        //    dd($user);
+            //    dd($user);
             // return response
             if ($user) {
                 return  SystemApiResponseServices::ReturnSuccess(
@@ -332,4 +334,8 @@ class auth extends Controller
             );
         }
     }
+    public function getUserInfo(Request $request)
+{
+    return response()->json($request->user());
+}
 }
