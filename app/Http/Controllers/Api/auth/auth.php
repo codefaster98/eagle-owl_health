@@ -51,35 +51,7 @@ class auth extends Controller
 
     public function Login(AuthLoginRequest $request)
     {
-        // try {
-        //     $data = DB::transaction(function () use ($request) {
-        //         // add user to database
-        //         return UsersUsersServices::Login($request->email, $request->password);
-        //     });
-        //     // return response
-        //     if ($data) {
-
-        //         $data['code'] = $request->email;
-
-        //         return  SystemApiResponseServices::ReturnSuccess(
-        //             $data,
-        //             __("return_messages.user_users.LoginSucc"),
-        //             null
-        //         );
-        //     } else {
-        //         return  SystemApiResponseServices::ReturnFailed(
-        //             [],
-        //             __("return_messages.user_users.LoginFailed"),
-        //             null
-        //         );
-        //     }
-        // } catch (\Throwable $th) {
-        //     return SystemApiResponseServices::ReturnError(
-        //         9800,
-        //         null,
-        //         $th->getMessage(),
-        //     );
-        // }
+       
         try {
             $data = DB::transaction(function () use ($request) {
 
