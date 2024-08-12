@@ -120,8 +120,7 @@ class UsersUsersServices
         if ($user) {
             // set active = true
             $user->active = true;
-            // set otp = null
-            // $user->otp = null;
+
             // save user
             $user->save();
             // return true
@@ -150,12 +149,11 @@ class UsersUsersServices
 
     static public function deleteUser($user_code)
     {
-
         $user = UsersUsersM::where('code', $user_code)->first();
-
         if ($user) {
-
             $user->delete();
+            $user->deleted=true;
+            // dd($user);
             return true;
         }
 

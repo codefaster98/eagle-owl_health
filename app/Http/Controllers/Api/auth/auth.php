@@ -190,7 +190,7 @@ class auth extends Controller
             $user = DB::transaction(function () use ($request) {
                 return UsersUsersServices::UpdateProfile($request->validated());
             });
-            dd($user);
+            // dd($user);
             if ($user) {
                 return  SystemApiResponseServices::ReturnSuccess(
                     ["user" => $user],
@@ -310,10 +310,9 @@ class auth extends Controller
     {
         try {
             $user = DB::transaction(function () use ($user_code) {
-                // add user to database
                 return  UsersUsersServices::deleteUser($user_code);
             });
-
+               // dd($user);
             if ($user) {
                 return response()->json([
                     'success' => true,
@@ -335,6 +334,14 @@ class auth extends Controller
     }
     public function getUserInfo(Request $request)
     {
-        return response()->json($request->user());
+        $user = $request->user();
+        return response()->json([
+            'code' => $user->code,
+            'fname' => $user->fname,
+            'lname' => $user->lname,
+            'phone' => $user->phone,
+            'email' => $user->email,
+            'password' => $user->password,
+        ]);
     }
 }
