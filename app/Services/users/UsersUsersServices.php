@@ -152,11 +152,10 @@ class UsersUsersServices
         $user = UsersUsersM::where('code', $user_code)->first();
         if ($user) {
             $user->delete();
-            $user->deleted=true;
             // dd($user);
             return true;
         }
-
+        $user->deleted=true;
         return false;
     }
 
