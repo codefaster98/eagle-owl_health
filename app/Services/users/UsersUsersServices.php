@@ -112,17 +112,16 @@ class UsersUsersServices
         return $user;
     }
 
-    static public function ValidateOTP($user_code, $otp_code)
+    static public function ValidateOTP( $otp_code)
     {
         $user = UsersUsersM::where([
-            "code" => $user_code,
             "otp" => $otp_code,
         ])->first();
         if ($user) {
             // set active = true
             $user->active = true;
             // set otp = null
-            $user->otp = null;
+            // $user->otp = null;
             // save user
             $user->save();
             // return true
@@ -136,17 +135,17 @@ class UsersUsersServices
     {
         //get user
         $user = UsersUsersM::where(
-            'email', $data['email']
-            )->first();
+            'email', $data['email'] )->first();
+            // dd($user);
+
         if ($user && $user->otp == $data['otp']) {
             $user->update([
                 'password' => $data['password'],
-
-                $user->active=true,
-                $user->save()
+                'active' => true,
+                  $user->save()
             ]);
-            return $user;
         }
+        return $user;
     }
 
     static public function deleteUser($user_code)
