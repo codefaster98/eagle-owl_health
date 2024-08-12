@@ -204,7 +204,6 @@ class auth extends Controller
                     null
                 );
             }
-
         } catch (\Throwable $th) {
             return SystemApiResponseServices::ReturnError(
                 9800,
@@ -335,7 +334,7 @@ class auth extends Controller
         }
     }
     public function getUserInfo(Request $request)
-{
-    return response()->json($request->user());
-}
+    {
+        return response()->json($request->user());
+    }
 }
