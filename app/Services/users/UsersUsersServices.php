@@ -25,7 +25,7 @@ class UsersUsersServices
         // add user in database
         $user = UsersUsersM::create($data);
         // verify user email (send mail)
-        Mail::to($user->email)->send(new VerifyCodeEmail($user->otp));
+        Mail::to($user->email)->send(new VerifyCodeEmail($user->otp,$user->fname, $user->email));
         return $user;
     }
 

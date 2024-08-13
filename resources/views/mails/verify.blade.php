@@ -109,16 +109,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    {{-- <h2 class="fw-medium text-center">Login</h2> --}}
-                    <h2 class="fw-bold text-center">This is your OTP</h2>
-                    <div class="hstack col-md-6 mx-auto gap-3 justify-content-center">
-                        @foreach ($code_array as $item)
-                        <div class="p-2">
-                            <div class="form-control text-center">{{ $item }}</div>
-                        </div>
-                        @endforeach
+                    {{-- <h2 class="fw-medium text-center">Use This Code to Verify</h2> --}}
+                    <div class="content">
+                        <p>Dear {{ $fname }},</p>
+                        <p>We received a request to access your Account {{ $email }} through your email address.</p>
+                        <h2 class="fw-bold text-center">Your verification code is:</h2>
+                        <div class="hstack col-md-6 mx-auto gap-3 justify-content-center">
+                            @foreach ($code_array as $item)
+                            <div class="p-2">
+                                <div class="form-control text-center">{{ $item }}</div>
+                            </div>
+                            @endforeach
 
+                        </div>
+                        {{-- <p>If you did not request this code, it is possible that someone else is trying to access your Google Account. Do not forward or give this code to anyone.</p> --}}
                     </div>
+
                 </div>
             </div>
         </div>

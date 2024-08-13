@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
@@ -51,22 +52,32 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
                 Select::make('speakers')
-                ->label('Speakers')
-                ->options(SpeakersSpeakersM::all()->pluck('code','id'))
-                ->searchable()
-                ->multiple(),
+                    ->label('Speakers')
+                    ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
+                    ->searchable()
+                    ->multiple(),
             ]);
     }
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
 
-
-
-        // return $record;
-        $record->update($data);
+        if (isset($data['image'])) {
+            if ($record->image && Storage::disk('public')->exists($record->image)) {
+                Storage::disk('public')->delete($record->image);
+            }
+            $imagePath = $data['image']->store('events_events', 'public');
+            $record->image = $imagePath;
+        }
         $record->speakers()->sync($data['speakers'] ?? []);
+        $record->save();
 
         return $record;
+
+
+        // // return $record;
+        // $record->update($data);
+        // $record->speakers()->sync($data['speakers'] ?? []);
+
+        // return $record;
     }
 }
-

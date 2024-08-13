@@ -56,4 +56,5 @@ class EditSpeakersSpeakers extends EditRecord
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('speakers_speakers')
             ]);
     }
+   
 }

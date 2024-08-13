@@ -15,9 +15,14 @@ class VerifyCodeEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public  $code,
-    ) {
+    public $fname;
+    public $email;
+    public  $code;
+
+    public function __construct($code,$fname, $email) {
+        $this->fname = $fname;
+        $this->email = $email;
+        $this->code = $code;
     }
 
     /**
@@ -41,6 +46,8 @@ class VerifyCodeEmail extends Mailable
             view: 'mails.verify',
             with: [
                 "code" => $this->code,
+                'name' => $this->fname,
+                'email' => $this->email,
                 "code_array" => str_split($this->code)
             ]
         );
