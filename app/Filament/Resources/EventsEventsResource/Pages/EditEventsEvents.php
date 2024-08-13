@@ -51,7 +51,7 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->deletable(true)->visibility('public') ,
-                Select::make('speakers')
+                Select::make('speaker_id')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('name', 'id'))
                     ->searchable()
@@ -75,7 +75,6 @@ class EditEventsEvents extends EditRecord
             $imagePath = $data['image']->store('events_events', 'public');
             $record->image = $imagePath;
         } elseif (isset($data['remove_image']) && $data['remove_image']) {
-            // إزالة الصورة إذا تم تحديد ذلك
             if ($record->image && Storage::disk('public')->exists($record->image)) {
                 Storage::disk('public')->delete($record->image);
             }
