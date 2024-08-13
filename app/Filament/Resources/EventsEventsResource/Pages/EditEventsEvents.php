@@ -76,24 +76,12 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-
-                // حقل تحميل الصورة
                 FileUpload::make('image')
                     ->label("Image")
                     ->disk('public')
                     ->directory('events_events')
                     ->visibility('public')
                     ->required(false),
-
-                // عرض الصورة الحالية بجانب حقل تحميل الصورة
-                Html::make('current_image')
-                    ->label('Current Image')
-                    ->html(function ($record) {
-                        // تحقق مما إذا كان هناك صورة موجودة واظهرها
-                        return $record->image
-                            ? '<img src="' . asset('storage/events_events/' . $record->image) . '" alt="Current Image" style="max-width: 300px; height: auto;">'
-                            : 'No image available';
-                    }),
             ])
             ->schema([
                 Select::make('speakers')
