@@ -50,7 +50,7 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
+                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->deletable(true)->visibility('public') ,
                 Select::make('speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
@@ -61,23 +61,28 @@ class EditEventsEvents extends EditRecord
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
 
+        // if (isset($data['image'])) {
+        //     if ($record->image && Storage::disk('public')->exists($record->image)) {
+        //         Storage::disk('public')->delete($record->image);
+        //     }
+        //     $imagePath = $data['image']->store('events_events', 'public');
+        //     $record->image = $imagePath;
+        // }
         if (isset($data['image'])) {
             if ($record->image && Storage::disk('public')->exists($record->image)) {
                 Storage::disk('public')->delete($record->image);
             }
             $imagePath = $data['image']->store('events_events', 'public');
             $record->image = $imagePath;
+        } elseif (isset($data['remove_image']) && $data['remove_image']) {
+            // إزالة الصورة إذا تم تحديد ذلك
+            if ($record->image && Storage::disk('public')->exists($record->image)) {
+                Storage::disk('public')->delete($record->image);
+            }
+            $record->image = null;
         }
         $record->speakers()->sync($data['speakers'] ?? []);
         $record->save();
-
         return $record;
-
-
-        // // return $record;
-        // $record->update($data);
-        // $record->speakers()->sync($data['speakers'] ?? []);
-
-        // return $record;
     }
 }
