@@ -11,7 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
 use App\Models\Speakers\SpeakersSpeakersM;
-use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Html;
 
 use App\Filament\Resources\EventsEventsResource;
 
@@ -86,15 +86,14 @@ class EditEventsEvents extends EditRecord
                     ->required(false),
 
                 // عرض الصورة الحالية بجانب حقل تحميل الصورة
-                Placeholder::make('current_image')
+                Html::make('current_image')
                     ->label('Current Image')
-                    ->content(function ($record) {
-                        // عرض الصورة إذا كانت موجودة
+                    ->html(function ($record) {
+                        // تحقق مما إذا كان هناك صورة موجودة واظهرها
                         return $record->image
                             ? '<img src="' . asset('storage/events_events/' . $record->image) . '" alt="Current Image" style="max-width: 300px; height: auto;">'
                             : 'No image available';
-                    })
-                    ->html(), // استخدم html() لعرض HTML
+                    }),
             ])
             ->schema([
                 Select::make('speakers')
