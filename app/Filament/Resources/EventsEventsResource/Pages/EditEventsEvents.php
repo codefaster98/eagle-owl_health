@@ -50,7 +50,10 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->deletable(true)->visibility('public') ,
+                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->visibility('public') ->preview(function ($value) {
+                    // عرض الصورة الحالية إذا كانت موجودة
+                    return $value ? asset('storage/events_events/' . $value) : null;
+                }) ,
                 Select::make('speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
