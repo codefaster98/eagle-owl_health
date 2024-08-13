@@ -50,16 +50,21 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->visibility('public') ->preview(function ($value) {
-                    // عرض الصورة الحالية إذا كانت موجودة
-                    return $value ? asset('storage/events_events/' . $value) : null;
-                }) ,
+                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->visibility('public') ->required(false)
+                ->preview(function ($image) {
+                    return $image ? asset('storage/events_events/' . $image) : null;
+                })
+                ->afterStateUpdated(function ($state) {
+                    // يمكنك استخدام هذه الدالة لتنفيذ أي منطق بعد تحديث الحالة
+                    // على سبيل المثال، يمكنك التحقق مما إذا كانت الصورة قديمة أو جديدة
+                }),
                 Select::make('speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
                     ->searchable()
                     ->multiple(),
             ]);
+
     }
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
