@@ -53,7 +53,7 @@ class EditEventsEvents extends EditRecord
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events')->deletable(true)->visibility('public') ,
                 Select::make('speakers')
                     ->label('Speakers')
-                    ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
+                    ->options(SpeakersSpeakersM::all()->pluck('name', 'id'))
                     ->searchable()
                     ->multiple(),
             ]);
