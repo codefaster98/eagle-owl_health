@@ -2,10 +2,10 @@
 
 namespace App\Models\Events;
 
-use App\Models\Speakers\SpeakersSpeakersM;
 use App\Models\Users\UsersUsersM;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Speakers\SpeakersSpeakersM;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class EventsEventsM extends Model
 {
@@ -48,4 +48,5 @@ class EventsEventsM extends Model
             'speakers_id'
         );
     }
+
 }
