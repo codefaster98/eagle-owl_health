@@ -72,7 +72,7 @@ class EditEventsEvents extends EditRecord
             if ($record->image && Storage::disk('public')->exists($record->image)) {
                 Storage::disk('public')->delete($record->image);
             }
-            $imagePath = $data['image']->store('events_events', 'public');
+            $imagePath = $data['image']->put('events_events', 'public');
             $record->image = $imagePath;
         } elseif (isset($data['remove_image']) && $data['remove_image']) {
             // إزالة الصورة إذا تم تحديد ذلك
