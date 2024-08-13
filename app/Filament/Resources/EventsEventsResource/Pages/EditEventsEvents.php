@@ -61,26 +61,6 @@ class EditEventsEvents extends EditRecord
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
 
-        // if (isset($data['image'])) {
-        //     if ($record->image && Storage::disk('public')->exists($record->image)) {
-        //         Storage::disk('public')->delete($record->image);
-        //     }
-        //     $imagePath = $data['image']->store('events_events', 'public');
-        //     $record->image = $imagePath;
-        // }
-        if (isset($data['image'])) {
-            if ($record->image && Storage::disk('public')->exists($record->image)) {
-                Storage::disk('public')->delete($record->image);
-            }
-            $imagePath = $data['image']->putFile('events_events', 'public');
-            $record->image = $imagePath;
-        } elseif (isset($data['remove_image']) && $data['remove_image']) {
-            // إزالة الصورة إذا تم تحديد ذلك
-            if ($record->image && Storage::disk('public')->exists($record->image)) {
-                Storage::disk('public')->delete($record->image);
-            }
-            $record->image = null;
-        }
         $record->speakers()->sync($data['speakers'] ?? []);
         $record->save();
         return $record;
