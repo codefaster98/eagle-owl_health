@@ -66,7 +66,6 @@ class EditEventsEvents extends EditRecord
     {
         $record->update($data);
         $record->speakers()->sync($data['speakers'] ?? []);
-        $record->save();
         return $record;
     }
 }
