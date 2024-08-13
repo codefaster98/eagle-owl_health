@@ -11,8 +11,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
 use App\Models\Speakers\SpeakersSpeakersM;
-use Filament\Forms\Components\Html;
-
 use App\Filament\Resources\EventsEventsResource;
 
 class EditEventsEvents extends EditRecord
@@ -50,16 +48,15 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->label("image")->disk('public')->directory('events_events')->visibility('public')->required(false)
-
-            ])
-            ->schema([
+                FileUpload::make('image')->label("image")->disk('public')->directory('events_events')->visibility('public')->required(false),
                 Select::make('speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
                     ->searchable()
                     ->multiple()
+
             ]);
+
     }
 
     protected function handleRecordUpdate(Model $record, array $data): Model
