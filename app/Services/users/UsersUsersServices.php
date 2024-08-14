@@ -108,7 +108,7 @@ class UsersUsersServices
         $user->otp = $otp;
         $user->active=false;
         $user->save();
-        Mail::to($user->email)->send(new ResetPasswordCode($otp));
+        Mail::to($user->email)->send(new ResetPasswordCode($otp,$user->fname, $user->email));
         return $user;
     }
 

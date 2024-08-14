@@ -3,7 +3,6 @@
 namespace App\Mail\users;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -16,10 +15,14 @@ class ResetPasswordCode extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public  $code,
-        
-    ) {
+    public $fname;
+    public $email;
+    public  $code;
+
+    public function __construct($code,$fname, $email) {
+        $this->fname = $fname;
+        $this->email = $email;
+        $this->code = $code;
     }
 
     /**
@@ -40,9 +43,11 @@ class ResetPasswordCode extends Mailable
         // view("")
         return new Content(
             // htmlString: "Youd Verfy Code <br>" . $this->code
-            view: 'mails.verify',
+            view: 'mails.verifyForget',
             with: [
                 "code" => $this->code,
+                'name' => $this->fname,
+                'email' => $this->email,
                 "code_array" => str_split($this->code)
             ]
         );
