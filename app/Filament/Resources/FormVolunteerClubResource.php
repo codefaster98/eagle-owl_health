@@ -60,6 +60,20 @@ class FormVolunteerClubResource extends Resource
                     Forms\Components\Textarea::make('other_notes')
                         ->required()
                         ->label('Other_Notes'),
+                        Forms\Components\CheckboxList::make('interests')
+                ->label('Interested in')
+                ->options([
+                    'interest_administration' => 'Administration',
+                    'interest_field_work' => 'Field Work',
+                    'interest_campaigning' => 'Campaigning',
+                    'interest_volunteer_coordination' => 'Volunteer Coordination',
+                    'interest_media_maintenance_gardening' => 'Media Maintenance/Gardening',
+                    'interest_health_wellness_disability' => 'Health/Wellness/Disability',
+                    'interest_festivals_culture' => 'Festivals/Culture',
+                    'interest_other' => 'Other',
+                ])
+                ->columns(2)
+                ->default([]),
                 ]);
     }
 
@@ -79,6 +93,29 @@ class FormVolunteerClubResource extends Resource
                 Tables\Columns\TextColumn::make('time_available')->label('Time_Available'),
                 Tables\Columns\TextColumn::make('skills')->label('Skills'),
                 Tables\Columns\TextColumn::make('other_notes')->label('Other_Notes'),
+                Tables\Columns\TextColumn::make('interests_display')
+                ->label('Interested in')
+                ->formatStateUsing(function (array $state) {
+                    $interests = [
+                        'interest_administration' => 'Administration',
+                        'interest_field_work' => 'Field Work',
+                        'interest_campaigning' => 'Campaigning',
+                        'interest_volunteer_coordination' => 'Volunteer Coordination',
+                        'interest_media_maintenance_gardening' => 'Media Maintenance/Gardening',
+                        'interest_health_wellness_disability' => 'Health/Wellness/Disability',
+                        'interest_festivals_culture' => 'Festivals/Culture',
+                        'interest_other' => 'Other',
+                    ];
+
+                    $display = [];
+                    foreach ($interests as $key => $label) {
+                        if ($state[$key] ?? false) {
+                            $display[] = $label;
+                        }
+                    }
+
+                    return implode(', ', $display);
+                }),
             ])
             ->filters([
                 //
