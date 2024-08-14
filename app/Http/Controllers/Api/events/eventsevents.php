@@ -1,10 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api\events;
-
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\events\EventsEventsGetAllRequest;
 use App\Services\users\EventsEventsServices;

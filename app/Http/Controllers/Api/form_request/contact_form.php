@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\form_request;
+namespace App\Http\Controllers\Api\form_request;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\form_request\FormRequestContactRequest;

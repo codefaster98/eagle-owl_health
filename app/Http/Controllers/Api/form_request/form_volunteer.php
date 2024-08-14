@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\form_request;
+namespace App\Http\Controllers\Api\form_request;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
