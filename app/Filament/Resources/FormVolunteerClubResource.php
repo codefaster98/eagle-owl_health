@@ -140,7 +140,7 @@ class FormVolunteerClubResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFormVolunteerClubs::route('/'),
+            // 'index' => Pages\ListFormVolunteerClubs::route('/'),
             // 'create' => Pages\CreateFormVolunteerClub::route('/create'),
             // 'edit' => Pages\EditFormVolunteerClub::route('/{record}/edit'),
         ];
