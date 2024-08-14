@@ -141,8 +141,8 @@ class FormVolunteerClubResource extends Resource
     {
         return [
             'index' => Pages\ListFormVolunteerClubs::route('/'),
-            // 'create' => Pages\CreateFormVolunteerClub::route('/create'),
-            // 'edit' => Pages\EditFormVolunteerClub::route('/{record}/edit'),
+            'create' => Pages\CreateFormVolunteerClub::route('/create'),
+            'edit' => Pages\EditFormVolunteerClub::route('/{record}/edit'),
         ];
     }
 }
