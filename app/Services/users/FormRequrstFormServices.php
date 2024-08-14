@@ -20,10 +20,10 @@ class FormRequrstFormServices
         $messageBody .= "Message: {$user->message}\n";
         Mail::raw($messageBody, function ($message) {
             $message->to('shimaa0mohamed19@gmail.com')
-                ->subject('New Form Request');
+                ->subject('New Volunteer Application');
         });
         Notification::make()
-        ->title('New Form Request')
+        ->title('New Volunteer Application')
         ->body("A new message from {$user->name}.\nPhone: {$user->phone}\nEmail: {$user->email}\nMessage: {$user->message}")
         ->send();
         return $user;

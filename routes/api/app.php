@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\members\members;
 use App\Http\Controllers\Api\events\eventsevents;
 use App\Http\Controllers\Api\form_request\contact_form;
 use App\Http\Controllers\Api\form_request\form_request;
+use App\Http\Controllers\api\form_request\form_volunteer;
 use App\Http\Controllers\Api\memberships\memberships;
 
 // all routes without auth
@@ -51,4 +52,12 @@ Route::name("api.app.")
             ->group(function () {
                 Route::post('Contact', 'Contact')->name("Contact");
             });
+             // form Volunteer form routes
+
+        Route::name("form_Volunteer.")
+        ->prefix("Form-Volunteer/")
+        ->controller(form_volunteer::class)
+        ->group(function () {
+            Route::post('Volunteer', 'Volunteer')->name("Volunteer");
+        });
     });
