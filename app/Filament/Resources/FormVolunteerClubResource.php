@@ -22,7 +22,51 @@ class FormVolunteerClubResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
+
+                ->schema([
+                    Forms\Components\TextInput::make('fname')
+                        ->required()
+                        ->label('Name'),
+                    Forms\Components\TextInput::make('phone')
+                        ->required()
+                        ->label('Phone'),
+                    Forms\Components\TextInput::make('whatsapp')
+                        ->required()
+                        ->label('Whatsapp'),
+                    Forms\Components\TextInput::make('email')
+                        ->required()
+                        ->label('Email'),
+                    Forms\Components\Textarea::make('age')
+                        ->required()
+                        ->label('Age'),
+                    Forms\Components\Textarea::make('gender')
+                        ->required()
+                        ->label('Gender'),
+                    Forms\Components\Textarea::make('education')
+                        ->required()
+                        ->label('Education'),
+                    Forms\Components\Textarea::make('language')
+                        ->required()
+                        ->label('Language'),
+                    Forms\Components\Textarea::make('talent')
+                        ->required()
+                        ->label('Talent'),
+                    Forms\Components\Textarea::make('time_available')
+                        ->required()
+                        ->label('Time_Available'),
+                    Forms\Components\Textarea::make('skills')
+                        ->required()
+                        ->label('Skills'),
+                    Forms\Components\Textarea::make('other_notes')
+                        ->required()
+                        ->label('Other_Notes'),
+                ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
                 Tables\Columns\TextColumn::make('fname')->label('Name'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('phone')->label('Phone'),
@@ -30,19 +74,11 @@ class FormVolunteerClubResource extends Resource
                 Tables\Columns\TextColumn::make('age')->label('Age'),
                 Tables\Columns\TextColumn::make('gender')->label('Gender'),
                 Tables\Columns\TextColumn::make('education')->label('Education'),
-                Tables\Columns\TextColumn::make('language')->label('language'),
+                Tables\Columns\TextColumn::make('language')->label('Language'),
                 Tables\Columns\TextColumn::make('talent')->label('Talent'),
                 Tables\Columns\TextColumn::make('time_available')->label('Time_Available'),
                 Tables\Columns\TextColumn::make('skills')->label('Skills'),
                 Tables\Columns\TextColumn::make('other_notes')->label('Other_Notes'),
-            ]);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
             ])
             ->filters([
                 //
