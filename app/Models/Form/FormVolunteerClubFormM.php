@@ -5,7 +5,7 @@ namespace App\Models\Form;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormVolunteerClubForm extends Model
+class FormVolunteerClubFormM extends Model
 {
     public $timestamps = false;
     protected $table = "form_volunteerClub_form";

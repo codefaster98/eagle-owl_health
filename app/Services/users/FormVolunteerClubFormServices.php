@@ -4,13 +4,13 @@ namespace App\Services\users;
 
 use Illuminate\Support\Facades\Mail;
 use Filament\Notifications\Notification;
-use App\Models\Form\FormVolunteerClubForm;
+use App\Models\Form\FormVolunteerClubFormM;
 
 class FormVolunteerClubFormServices
 {
     static public function Volunteer(array $data)
     {
-        $volunteer = FormVolunteerClubForm::create($data);
+        $volunteer = FormVolunteerClubFormM::create($data);
            // Build the message body for the email
         $messageBody = "A new volunteer application from: {$volunteer->fname} {$volunteer->lname}\n";
         $messageBody .= "Phone: {$volunteer->phone}\n";
