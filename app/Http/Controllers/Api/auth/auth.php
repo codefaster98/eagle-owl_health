@@ -67,6 +67,7 @@ class auth extends Controller
 
                 if ($user) {
                     $data['code'] = $user->code;
+                $data['fname'] = $user->fname;
 
                     return SystemApiResponseServices::ReturnSuccess(
                         $data,
