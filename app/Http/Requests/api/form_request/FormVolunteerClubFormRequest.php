@@ -45,7 +45,7 @@ class FormVolunteerClubFormRequest extends FormRequest
             'interest_other' => 'nullable|boolean',
 
             'talent' => 'nullable|string|max:255',
-            'time_available' => 'nullable|string|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            'time_available' => 'nullable|string|in:Weekdays,Weekends,Evenings,Flexible',
             'skills' => 'nullable|string',
             'other_notes' => 'nullable|string',
         ];
