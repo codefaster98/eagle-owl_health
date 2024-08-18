@@ -39,7 +39,7 @@ return new class extends Migration
 
             // Other fields
             $table->string('talent')->nullable();
-            $table->enum('time_available', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])->default('Wednesday')->nullable();
+            $table->enum('time_available', ['Weekdays', 'Weekends', 'Evenings', 'Flexible'])->default('Weekdays')->nullable();
             $table->text('skills')->nullable();
             $table->text('other_notes')->nullable();
 

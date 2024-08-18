@@ -67,7 +67,7 @@ class auth extends Controller
 
                 if ($user) {
                     $data['code'] = $user->code;
-                $data['fname'] = $user->fname;
+                    $data['fname'] = $user->fname;
 
                     return SystemApiResponseServices::ReturnSuccess(
                         $data,
@@ -313,7 +313,7 @@ class auth extends Controller
             $user = DB::transaction(function () use ($user_code) {
                 return  UsersUsersServices::deleteUser($user_code);
             });
-               // dd($user);
+            // dd($user);
             if ($user) {
                 return response()->json([
                     'success' => true,
