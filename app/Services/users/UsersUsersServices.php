@@ -12,7 +12,7 @@ class UsersUsersServices
 {
     static public function GenerateNewCode()
     {
-        $code = Str::random(5);
+        $code = Str::random(6);
         if (UsersUsersM::where('code', $code)->exists()) {
             return Self::GenerateNewCode();
         } else {
