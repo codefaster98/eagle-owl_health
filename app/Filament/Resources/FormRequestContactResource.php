@@ -68,14 +68,22 @@ class FormRequestContactResource extends Resource
         ];
     }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListFormRequestContacts::route('/'),
-            // 'create' => Pages\CreateFormRequestContact::route('/create'),
-            // 'edit' => Pages\EditFormRequestContact::route('/{record}/edit'),
-        ];
-    }
+
+
+        public static function getPages(): array
+        {
+            return [
+                'index' => Pages\ListFormRequestContacts::route('/'),
+                // Commented out or remove create and edit pages
+                // 'create' => Pages\CreateFormVolunteerClub::route('/create'),
+                // 'edit' => Pages\EditFormVolunteerClub::route('/{record}/edit'),
+            ];
+        }
+        public static function shouldRegisterNavigation(): bool
+        {
+            return true;
+        }
+
 
 }
 

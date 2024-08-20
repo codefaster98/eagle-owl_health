@@ -19,7 +19,7 @@ use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
 
 class auth extends Controller
 {
-    //
+    //Register
     public function Register(AuthRegisterRequest $request)
     {
         try {
@@ -50,6 +50,7 @@ class auth extends Controller
         }
     }
 
+    //Login
     public function Login(AuthLoginRequest $request)
     {
 
@@ -97,6 +98,7 @@ class auth extends Controller
         }
     }
 
+    //Verify Email
     public function Verify(AuthVerifyRequest $request)
     {
         try {
@@ -126,6 +128,7 @@ class auth extends Controller
             );
         }
     }
+    //ResendOtp To Verify Email
     public function ResendOtp(EmailVerificationRequest $request)
     {
         try {
@@ -155,6 +158,7 @@ class auth extends Controller
         }
     }
 
+    //Logout
     public function Logout()
     {
 
@@ -185,6 +189,7 @@ class auth extends Controller
         }
     }
 
+    //Update User Profile
     public function UpdateProfile(AuthUpdateRequest $request)
     {
         try {
@@ -214,6 +219,7 @@ class auth extends Controller
         }
     }
 
+    //ForgetPassword
     public function ForgetPassword(AuthForgetPasswordRequest $request)
     {
         try {
@@ -345,4 +351,5 @@ class auth extends Controller
             'password' => $user->password,
         ]);
     }
+    
 }

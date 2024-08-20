@@ -10,10 +10,17 @@ class ListFormRequestFormMS extends ListRecords
 {
     protected static string $resource = FormRequestFormMResource::class;
 
-    protected function getHeaderActions(): array
+    protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Disable the "Create" button
+        ];
+    }
+
+    protected function getTableActions(): array
+    {
+        return [
+            // Disable the "Edit" button
         ];
     }
 }

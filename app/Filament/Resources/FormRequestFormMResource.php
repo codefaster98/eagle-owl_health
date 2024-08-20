@@ -72,8 +72,14 @@ class FormRequestFormMResource extends Resource
     {
         return [
             'index' => Pages\ListFormRequestFormMS::route('/'),
-            // 'create' => Pages\CreateFormRequestFormM::route('/create'),
-            // 'edit' => Pages\EditFormRequestFormM::route('/{record}/edit'),
+            // Commented out or remove create and edit pages
+            // 'create' => Pages\CreateFormVolunteerClub::route('/create'),
+            // 'edit' => Pages\EditFormVolunteerClub::route('/{record}/edit'),
         ];
     }
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
+
 }
