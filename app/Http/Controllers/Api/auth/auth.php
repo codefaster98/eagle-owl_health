@@ -250,6 +250,7 @@ class auth extends Controller
         }
     }
 
+    //ValidateOTP
     public function ValidateOTP(AuthValidateOtpRequest $request)
     {
         try {
@@ -280,14 +281,11 @@ class auth extends Controller
         }
     }
 
+    //ResetPassword
     static public function ResetPassword(AuthResetPasswordRequest $request)
     {
         try {
             $user = DB::transaction(function () use ($request) {
-                // dd($request);
-                // add user to database
-                // $validatedData = $request->validated();
-                // dd($validatedData);
                 return UsersUsersServices::ResetPassword($request->validated());
             });
             //    dd($user);
@@ -313,6 +311,8 @@ class auth extends Controller
             );
         }
     }
+
+    //deleteUser
     static public function deleteUser($user_code)
     {
         try {
@@ -339,6 +339,8 @@ class auth extends Controller
             );
         }
     }
+
+    //getUserInfo
     public function getUserInfo(Request $request)
     {
         $user = $request->user();
@@ -351,5 +353,5 @@ class auth extends Controller
             'password' => $user->password,
         ]);
     }
-    
+
 }

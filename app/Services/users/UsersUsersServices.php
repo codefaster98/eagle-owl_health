@@ -96,7 +96,7 @@ class UsersUsersServices
             'lname' => $data['lname'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'password' => isset($data['password']) ? bcrypt($data['password']) : $user->password,
+            'password' => isset($data['password']) ? ($data['password']) : $user->password,
         ]);
         return $user;
     }
@@ -141,7 +141,7 @@ class UsersUsersServices
             $user->update([
                 'password' => $data['password'],
                 'active' => true,
-                  $user->save()
+                $user->save()
             ]);
         }
         return $user;
