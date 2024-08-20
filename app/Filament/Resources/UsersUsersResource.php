@@ -32,6 +32,7 @@ class UsersUsersResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('code')->label('Code'),
                 Tables\Columns\TextColumn::make('fname')->label('First Name'),
                 Tables\Columns\TextColumn::make('lname')->label('Last Name'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
