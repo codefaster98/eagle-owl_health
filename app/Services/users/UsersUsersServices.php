@@ -58,7 +58,7 @@ class UsersUsersServices
             $newOtp = rand(100000, 999999);
             $user->otp = $newOtp;
             $user->save();
-            Mail::to($user->email)->send(new VerifyCodeEmail($newOtp));
+            Mail::to($user->email)->send(new VerifyCodeEmail($newOtp, $user->fname, $user->email));
             return $user;
         } else {
             return false;
