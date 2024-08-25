@@ -99,35 +99,70 @@ class auth extends Controller
     }
 
     //Verify Email
+    // public function Verify(AuthVerifyRequest $request)
+    // {
+    //     try {
+    //         $token = DB::transaction(function () use ($request) {
+    //             // add user to database
+    //             return UsersUsersServices::Verify($request->user_code, $request->otp);
+    //         });
+    //         // return response
+    //         if ($token) {
+    //             return  SystemApiResponseServices::ReturnSuccess(
+    //                 [],
+    //                 __("return_messages.user_users.VerifySucc"),
+    //                 null
+    //             );
+    //         } else {
+    //             return  SystemApiResponseServices::ReturnFailed(
+    //                 [],
+    //                 __("return_messages.user_users.VerifyFailed"),
+    //                 null
+    //             );
+    //         }
+    //     } catch (\Throwable $th) {
+    //         return SystemApiResponseServices::ReturnError(
+    //             9800,
+    //             null,
+    //             $th->getMessage(),
+    //         );
+    //     }
+    // }
     public function Verify(AuthVerifyRequest $request)
-    {
-        try {
-            $token = DB::transaction(function () use ($request) {
-                // add user to database
-                return UsersUsersServices::Verify($request->user_code, $request->otp);
-            });
-            // return response
-            if ($token) {
-                return  SystemApiResponseServices::ReturnSuccess(
-                    [],
-                    __("return_messages.user_users.VerifySucc"),
-                    null
-                );
-            } else {
-                return  SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.user_users.VerifyFailed"),
-                    null
-                );
-            }
-        } catch (\Throwable $th) {
-            return SystemApiResponseServices::ReturnError(
-                9800,
-                null,
-                $th->getMessage(),
+{
+    try {
+        $user = DB::transaction(function () use ($request) {
+            // التحقق من المستخدم وإرجاعه
+            return UsersUsersServices::Verify($request->user_code, $request->otp);
+        });
+
+        // إذا تم العثور على المستخدم
+        if ($user) {
+            // إنشاء التوكن
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            // إرجاع الاستجابة مع التوكن
+            return SystemApiResponseServices::ReturnSuccess(
+                ['token' => $token],
+                __("return_messages.user_users.VerifySucc"),
+                null
+            );
+        } else {
+            return  SystemApiResponseServices::ReturnFailed(
+                [],
+                __("return_messages.user_users.VerifyFailed"),
+                null
             );
         }
+    } catch (\Throwable $th) {
+        return SystemApiResponseServices::ReturnError(
+            9800,
+            null,
+            $th->getMessage(),
+        );
     }
+}
+
     //ResendOtp To Verify Email
     public function ResendOtp(EmailVerificationRequest $request)
     {

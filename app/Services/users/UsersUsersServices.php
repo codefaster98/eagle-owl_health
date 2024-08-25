@@ -44,7 +44,7 @@ class UsersUsersServices
             // save user
             $user->save();
             // return true
-            return true;
+            return $user;
         } else {
             return false;
         }
