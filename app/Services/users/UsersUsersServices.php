@@ -50,20 +50,45 @@ class UsersUsersServices
         }
     }
 
-    static public function ResendOtp($email)
-    {
-        $user = UsersUsersM::where("email", $email)->first();
+    // static public function ResendOtp($email)
+    // {
+    //     $user = UsersUsersM::where("email", $email)->first();
 
-        if ($user) {
-            $newOtp = rand(100000, 999999);
-            $user->otp = $newOtp;
-            $user->save();
-            Mail::to($user->email)->send(new VerifyCodeEmail($newOtp, $user->fname, $user->email));
-            return $user;
-        } else {
-            return false;
-        }
+    //     if ($user) {
+    //         $newOtp = rand(100000, 999999);
+    //         $user->otp = $newOtp;
+    //         $user->save();
+    //         Mail::to($user->email)->send(new VerifyCodeEmail($newOtp, $user->fname, $user->email));
+    //         return $user;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+    static public function ResendOtp($email)
+{
+    $user = UsersUsersM::where("email", $email)->first();
+
+    if ($user) {
+        $newOtp = rand(100000, 999999);
+        $user->otp = $newOtp;
+        $user->save();
+
+        // إرسال الإيميل مع OTP
+        Mail::to($user->email)->send(new VerifyCodeEmail($newOtp, $user->fname, $user->email));
+
+        // توليد الـ token
+        $token = auth()->login($user);
+
+        // إرجاع الـ user والـ token
+        return [
+            'user' => $user,
+            'token' => $token
+        ];
+    } else {
+        return false;
     }
+}
+
     static public function Login($email, $password)
     {
         $token = auth("api")->attempt([
