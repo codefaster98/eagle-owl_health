@@ -59,11 +59,27 @@ class EditEventsEvents extends EditRecord
 
     }
 
+    // protected function handleRecordUpdate(Model $record, array $data): Model
+    // {
+    //     \Log::info('Updating record with data:', $data);
+    //     $record->update($data);
+    //     $record->speakers()->sync($data['speakers'] ?? []);
+    //     return $record;
+    // }
     protected function handleRecordUpdate(Model $record, array $data): Model
-    {
-        \Log::info('Updating record with data:', $data);
-        $record->update($data);
-        $record->speakers()->sync($data['speakers'] ?? []);
-        return $record;
+{
+    \Log::info('Updating record with data:', $data);
+
+    $record->update($data);
+
+    if (isset($data['speakers'])) {
+        \Log::info('Syncing speakers:', $data['speakers']);
+        $record->speakers()->sync($data['speakers']);
+    } else {
+        \Log::info('No speakers found in data.');
     }
+
+    return $record;
+}
+
 }
