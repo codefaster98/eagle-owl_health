@@ -72,9 +72,9 @@ class EditEventsEvents extends EditRecord
 
     $record->update($data);
 
-    if (isset($data['speakers'])) {
-        \Log::info('Syncing speakers:', $data['speakers']);
-        $record->speakers()->sync($data['speakers']);
+    if (isset($data['Speakers'])) {
+        \Log::info('Syncing speakers:', $data['Speakers']);
+        $record->Speakers()->sync($data['Speakers']);
     } else {
         \Log::info('No speakers found in data.');
     }
