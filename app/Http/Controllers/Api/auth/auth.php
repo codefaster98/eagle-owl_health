@@ -129,39 +129,42 @@ class auth extends Controller
     //     }
     // }
     public function Verify(AuthVerifyRequest $request)
-    {
-        try {
-            $user = DB::transaction(function () use ($request) {
-                // التحقق من المستخدم وإرجاعه
-                return UsersUsersServices::Verify($request->user_code, $request->otp);
-            });
+{
+    try {
+        // Verify the user inside a transaction
+        $user = DB::transaction(function () use ($request) {
+            return UsersUsersServices::Verify($request->user_code, $request->otp);
+        });
 
-            // إذا تم العثور على المستخدم
-            if ($user) {
-                // إنشاء التوكن باستخدام JWT
-                $token = JWTAuth::fromUser($user);
+        // If user verification is successful
+        if ($user) {
+            // Generate the JWT token
+            $token = JWTAuth::fromUser($user);
 
-                // إرجاع الاستجابة مع التوكن
-                return SystemApiResponseServices::ReturnSuccess(
-                    ['token' => $token],
-                    __("return_messages.user_users.VerifySucc"),
-                    null
-                );
-            } else {
-                return  SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.user_users.VerifyFailed"),
-                    null
-                );
-            }
-        } catch (\Throwable $th) {
-            return SystemApiResponseServices::ReturnError(
-                9800,
-                null,
-                $th->getMessage(),
+            // Return success response with the token
+            return SystemApiResponseServices::ReturnSuccess(
+                ['token' => $token],
+                __("return_messages.user_users.VerifySucc"),
+                null
+            );
+        } else {
+            // Return failed response if verification fails
+            return SystemApiResponseServices::ReturnFailed(
+                [],
+                __("return_messages.user_users.VerifyFailed"),
+                null
             );
         }
+    } catch (\Throwable $th) {
+        // Return error response in case of an exception
+        return SystemApiResponseServices::ReturnError(
+            9800,
+            null,
+            $th->getMessage(),
+        );
     }
+}
+
 
     //ResendOtp To Verify Email
     public function ResendOtp(EmailVerificationRequest $request)

@@ -10,6 +10,7 @@ return [
         "UpdateFailed" => "Update User Info was Failed",
         "VerifySucc" => "User Verification was Successful",
         "VerifyFailed" => "User Verification Failed",
+        "ResendOtpSucc" => "Resend Otp Successful",
         "SendSucc" => "The Code was Send Successfuly",
         "SendFailed" => " Failed To Send",
         "VerifyOTPSucc" => "OTP is Correct",
