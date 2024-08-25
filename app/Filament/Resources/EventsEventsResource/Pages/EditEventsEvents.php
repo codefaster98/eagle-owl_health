@@ -61,6 +61,7 @@ class EditEventsEvents extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        \Log::info('Updating record with data:', $data);
         $record->update($data);
         $record->speakers()->sync($data['speakers'] ?? []);
         return $record;

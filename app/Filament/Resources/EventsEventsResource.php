@@ -14,13 +14,13 @@ class EventsEventsResource extends Resource
     protected static ?string $model = EventsEventsM::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = "events Panel";
+    protected static ?string $modelLabel = " All Events";
 
 
     public static function form(Form $form): Form
     {
-                return $form
-                ->schema([]);
+        return $form
+        ->schema([]);
 
     }
 
