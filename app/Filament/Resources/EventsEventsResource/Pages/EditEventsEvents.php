@@ -49,7 +49,7 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
                 FileUpload::make('image')->label("image")->disk('public')->directory('events_events')->visibility('public')->required(false),
-                Select::make('speakers')
+                Select::make('Speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('code', 'id'))
                     ->searchable()
@@ -59,27 +59,13 @@ class EditEventsEvents extends EditRecord
 
     }
 
-    // protected function handleRecordUpdate(Model $record, array $data): Model
-    // {
-    //     \Log::info('Updating record with data:', $data);
-    //     $record->update($data);
-    //     $record->speakers()->sync($data['speakers'] ?? []);
-    //     return $record;
-    // }
     protected function handleRecordUpdate(Model $record, array $data): Model
-{
-    \Log::info('Updating record with data:', $data);
-
-    $record->update($data);
-
-    if (isset($data['Speakers'])) {
-        \Log::info('Syncing speakers:', $data['Speakers']);
-        $record->Speakers()->sync($data['Speakers']);
-    } else {
-        \Log::info('No speakers found in data.');
+    {
+        \Log::info('Updating record with data:', $data);
+        $record->update($data);
+        $record->Speakers()->sync($data['Speakers'] ?? []);
+        return $record;
     }
 
-    return $record;
-}
 
 }
