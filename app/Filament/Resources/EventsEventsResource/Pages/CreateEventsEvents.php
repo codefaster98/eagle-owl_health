@@ -25,6 +25,7 @@ class CreateEventsEvents extends CreateRecord
     }
     public function form(Form $form): Form
     {
+        dd(SpeakersSpeakersM::all()->pluck('name', 'id'));
         return $form
             ->schema([
                 TextInput::make('title_ar')->required()->label("Arabic Title"),
