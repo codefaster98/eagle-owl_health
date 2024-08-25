@@ -25,7 +25,7 @@ class CreateEventsEvents extends CreateRecord
     }
     public function form(Form $form): Form
     {
-        dd(SpeakersSpeakersM::all()->pluck('name_ar', 'id'));
+        // dd(SpeakersSpeakersM::all()->pluck('name_ar', 'id'));
         return $form
             ->schema([
                 TextInput::make('title_ar')->required()->label("Arabic Title"),
@@ -43,7 +43,6 @@ class CreateEventsEvents extends CreateRecord
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
                 Select::make('Speakers')
                     ->label('Speakers')
-                    // ->options(SpeakersSpeakersM::all()->pluck('name', 'id'))
                     ->options(SpeakersSpeakersM::whereNotNull('name_ar')->pluck('name_ar', 'id'))
 
                     ->searchable()
