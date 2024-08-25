@@ -16,6 +16,8 @@ use App\Http\Requests\api\auth\AuthValidateOtpRequest;
 use App\Http\Requests\api\auth\AuthResetPasswordRequest;
 use App\Http\Requests\api\auth\EmailVerificationRequest;
 use App\Http\Requests\api\auth\AuthForgetPasswordRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class auth extends Controller
 {
