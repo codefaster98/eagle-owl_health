@@ -43,7 +43,9 @@ class CreateEventsEvents extends CreateRecord
                 FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
                 Select::make('Speakers')
                     ->label('Speakers')
-                    ->options(SpeakersSpeakersM::all()->pluck('name', 'id'))
+                    // ->options(SpeakersSpeakersM::all()->pluck('name', 'id'))
+                    ->options(SpeakersSpeakersM::whereNotNull('name')->pluck('name', 'id'))
+
                     ->searchable()
                     ->multiple(),
 
