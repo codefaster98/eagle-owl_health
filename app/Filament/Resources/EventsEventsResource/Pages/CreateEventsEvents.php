@@ -44,7 +44,7 @@ class CreateEventsEvents extends CreateRecord
                 Select::make('Speakers')
                     ->label('Speakers')
                     // ->options(SpeakersSpeakersM::all()->pluck('name', 'id'))
-                    ->options(SpeakersSpeakersM::whereNotNull('name')->pluck('name', 'id'))
+                    ->options(SpeakersSpeakersM::whereNotNull('name_ar')->pluck('name_ar', 'id'))
 
                     ->searchable()
                     ->multiple(),
