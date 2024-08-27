@@ -21,6 +21,8 @@ return [
         "LogoutFailed" => "User Logout Failed",
         "UserDeletedSuccessfully" => "User Deleted Successfully",
         "UserNotFound" => "User Not Found",
+        "EmailExists" => "EmailExists",
+
     ],
     "form_request" => [
         "AddSucc" => "Message Send Successfuly",

@@ -101,35 +101,6 @@ class auth extends Controller
     }
 
     //Verify Email
-    // public function Verify(AuthVerifyRequest $request)
-    // {
-    //     try {
-    //         $token = DB::transaction(function () use ($request) {
-    //             // add user to database
-    //             return UsersUsersServices::Verify($request->user_code, $request->otp);
-    //         });
-    //         // return response
-    //         if ($token) {
-    //             return  SystemApiResponseServices::ReturnSuccess(
-    //                 [],
-    //                 __("return_messages.user_users.VerifySucc"),
-    //                 null
-    //             );
-    //         } else {
-    //             return  SystemApiResponseServices::ReturnFailed(
-    //                 [],
-    //                 __("return_messages.user_users.VerifyFailed"),
-    //                 null
-    //             );
-    //         }
-    //     } catch (\Throwable $th) {
-    //         return SystemApiResponseServices::ReturnError(
-    //             9800,
-    //             null,
-    //             $th->getMessage(),
-    //         );
-    //     }
-    // }
     public function Verify(AuthVerifyRequest $request)
 {
     try {
@@ -230,33 +201,76 @@ class auth extends Controller
     }
 
     //Update User Profile
+    // public function UpdateProfile(AuthUpdateRequest $request)
+    // {
+    //     try {
+    //         $user = DB::transaction(function () use ($request) {
+    //             return UsersUsersServices::UpdateProfile($request->validated());
+    //         });
+    //         // dd($user);
+    //         if ($user) {
+    //             return  SystemApiResponseServices::ReturnSuccess(
+    //                 ["user" => $user],
+    //                 __("return_messages.user_users.UpdateSucc"),
+    //                 null
+    //             );
+    //         } else {
+    //             return  SystemApiResponseServices::ReturnFailed(
+    //                 [],
+    //                 __("return_messages.user_users.UpdateFailed"),
+    //                 null
+    //             );
+    //         }
+    //     } catch (\Throwable $th) {
+    //         return SystemApiResponseServices::ReturnError(
+    //             9800,
+    //             null,
+    //             $th->getMessage(),
+    //         );
+    //     }
+    // }
     public function UpdateProfile(AuthUpdateRequest $request)
     {
-        try {
-            $user = DB::transaction(function () use ($request) {
-                return UsersUsersServices::UpdateProfile($request->validated());
-            });
-            // dd($user);
-            if ($user) {
-                return  SystemApiResponseServices::ReturnSuccess(
-                    ["user" => $user],
-                    __("return_messages.user_users.UpdateSucc"),
-                    null
-                );
-            } else {
-                return  SystemApiResponseServices::ReturnFailed(
-                    [],
-                    __("return_messages.user_users.UpdateFailed"),
-                    null
-                );
-            }
-        } catch (\Throwable $th) {
-            return SystemApiResponseServices::ReturnError(
-                9800,
-                null,
-                $th->getMessage(),
+    try {
+        $user = DB::transaction(function () use ($request) {
+            return UsersUsersServices::UpdateProfile($request->validated());
+        });
+
+        if ($user) {
+            return SystemApiResponseServices::ReturnSuccess(
+                ["user" => $user],
+                __("return_messages.user_users.UpdateSucc"),
+                null
+            );
+        } else {
+            return SystemApiResponseServices::ReturnFailed(
+                [],
+                __("return_messages.user_users.UpdateFailed"),
+                null
             );
         }
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Check if the error is related to the unique email validation
+        if ($e->validator->errors()->has('email')) {
+            return SystemApiResponseServices::ReturnFailed(
+                [],
+                __("return_messages.user_users.EmailExists"),
+                null
+            );
+        }
+
+        return SystemApiResponseServices::ReturnError(
+            9800,
+            null,
+            $e->getMessage(),
+        );
+    } catch (\Throwable $th) {
+        return SystemApiResponseServices::ReturnError(
+            9800,
+            null,
+            $th->getMessage(),
+        );
+    }
     }
 
     //ForgetPassword
