@@ -231,47 +231,63 @@ class auth extends Controller
     // }
     public function UpdateProfile(AuthUpdateRequest $request)
     {
-    try {
-        $user = DB::transaction(function () use ($request) {
-            return UsersUsersServices::UpdateProfile($request->validated());
-        });
+        try {
+            $user = DB::transaction(function () use ($request) {
+                return UsersUsersServices::UpdateProfile($request->validated());
+            });
 
-        if ($user) {
-            return SystemApiResponseServices::ReturnSuccess(
-                ["user" => $user],
-                __("return_messages.user_users.UpdateSucc"),
-                null
+            if ($user) {
+                return SystemApiResponseServices::ReturnSuccess(
+                    ["user" => $user],
+                    __("return_messages.user_users.UpdateSucc"),
+                    null
+                );
+            } else {
+                return SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.UpdateFailed"),
+                    null
+                );
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Check if the error is related to the unique email validation
+            if ($e->validator->errors()->has('email')) {
+                return SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.EmailExists"),
+                    null
+                );
+            }
+
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $e->getMessage(),
             );
-        } else {
-            return SystemApiResponseServices::ReturnFailed(
-                [],
-                __("return_messages.user_users.UpdateFailed"),
-                null
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Handle duplicate email error
+            if ($e->errorInfo[1] == 1062) { // 1062 is the error code for duplicate entry
+                return SystemApiResponseServices::ReturnFailed(
+                    [],
+                    __("return_messages.user_users.EmailExists"),
+                    null
+                );
+            }
+
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $e->getMessage(),
+            );
+        } catch (\Throwable $th) {
+            return SystemApiResponseServices::ReturnError(
+                9800,
+                null,
+                $th->getMessage(),
             );
         }
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        // Check if the error is related to the unique email validation
-        if ($e->validator->errors()->has('email')) {
-            return SystemApiResponseServices::ReturnFailed(
-                [],
-                __("return_messages.user_users.EmailExists"),
-                null
-            );
-        }
+    }
 
-        return SystemApiResponseServices::ReturnError(
-            9800,
-            null,
-            $e->getMessage(),
-        );
-    } catch (\Throwable $th) {
-        return SystemApiResponseServices::ReturnError(
-            9800,
-            null,
-            $th->getMessage(),
-        );
-    }
-    }
 
     //ForgetPassword
     public function ForgetPassword(AuthForgetPasswordRequest $request)
