@@ -22,7 +22,7 @@ class payments extends Controller
         $request->validate([
             'currency' => 'required|string',
             'source' => 'required|array',
-            'callback_url' => 'required|url',
+            // 'callback_url' => 'required|url',
         ]);
 
         $user = Auth::user();
@@ -36,15 +36,16 @@ class payments extends Controller
         $source = $request->source;
         $source['name'] = $user->fname . ' ' . $user->lname;
         $description = "Payment for event " . $event->title_en;
+        $fixedCallbackUrl = 'https://yourdomain.com/payment/callback';
 
         $payment = $this->moyasarService->createPayment(
             $amount,
             $request->currency,
             $source,
             $description,
-         $request->callback_url
+            $fixedCallbackUrl
         );
-// dd($payment);
+        // dd($payment);
         if (!isset($payment['id']) || !isset($payment['status'])) {
             return response()->json([
                 'message' => 'Payment failed or invalid response from Moyasar',
