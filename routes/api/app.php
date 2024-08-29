@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\members\members;
+use App\Http\Controllers\Api\Payment\payments;
 use App\Http\Controllers\Api\events\eventsevents;
+use App\Http\Controllers\Api\memberships\memberships;
 use App\Http\Controllers\Api\form_request\contact_form;
 use App\Http\Controllers\Api\form_request\form_request;
 use App\Http\Controllers\Api\form_request\form_volunteer;
-use App\Http\Controllers\Api\memberships\memberships;
 
 // all routes without auth
 Route::name("api.app.")
@@ -60,4 +61,17 @@ Route::name("api.app.")
         ->group(function () {
             Route::post('Volunteer', 'Volunteer')->name("Volunteer");
         });
+    });
+
+    Route::name("api.app.")
+    ->prefix("API/")
+    ->middleware(['api_with_auth'])
+    ->group(function () {
+        // events routes
+        Route::name("payments.")
+            ->prefix("Payments/")
+            ->controller(payments::class)
+            ->group(function () {
+                Route::post('payment/{id}', 'processPayment')->name("processPayment");
+            });
     });

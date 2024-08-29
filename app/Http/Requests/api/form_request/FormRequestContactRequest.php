@@ -25,7 +25,7 @@ class FormRequestContactRequest extends FormRequest
             'lname' => "required|min:3|max:25",
             "phone" => "required|min_digits:11|max_digits:15",
             'email' => "required|email",
-            'message' => "required|min:10|max:250",
+            'message' => "required|max:250",
         ];
     }
     public function attributes(): array
