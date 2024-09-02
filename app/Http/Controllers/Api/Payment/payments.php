@@ -89,7 +89,7 @@ class payments extends Controller
         $amount = (int)($memberShip->amount*100);
         $source = $request->source;
         $source['name'] = $user->fname . ' ' . $user->lname;
-        $description = "Payment for event " . $memberShip->name_en;
+        $description = "Payment for " . $memberShip->name_en;
         $fixedCallbackUrl = 'https://yourdomain.com/payment/callback';
 
         $payment = $this->moyasarService->createPayment(
