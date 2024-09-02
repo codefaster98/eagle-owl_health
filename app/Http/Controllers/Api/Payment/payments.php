@@ -86,10 +86,10 @@ class payments extends Controller
             return response()->json(['message' => 'memberShip not found'], 404);
         }
 
-        $amount = (int)($memberShip->price*100);
+        $amount = (int)($memberShip->amount*100);
         $source = $request->source;
         $source['name'] = $user->fname . ' ' . $user->lname;
-        $description = "Payment for event " . $memberShip->title_en;
+        $description = "Payment for event " . $memberShip->name_en;
         $fixedCallbackUrl = 'https://yourdomain.com/payment/callback';
 
         $payment = $this->moyasarService->createPayment(
