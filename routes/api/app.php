@@ -72,6 +72,7 @@ Route::name("api.app.")
             ->prefix("Payments/")
             ->controller(payments::class)
             ->group(function () {
-                Route::post('payment/{id}', 'processPayment')->name("processPayment");
-            });
+            Route::post('payment/{id}', 'processPayment')->name("processPayment");
+            Route::post('memberShipPayment/{id}', 'memberShipPayment')->name("memberShipPayment");
+        });
     });
