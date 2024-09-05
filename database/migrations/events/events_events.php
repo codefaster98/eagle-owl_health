@@ -25,11 +25,17 @@ return new class extends Migration
             $table->longText('long_desc_ar');
             $table->longText('long_desc_en');
             $table->decimal('price');
+            $table->decimal('price_ar');
             $table->string('date');
             $table->string('date_details');
             $table->string('from_time');
             $table->string('to_time');
             $table->string('location');
+            $table->string('date_ar');
+            $table->string('date_details_ar');
+            $table->string('from_time_ar');
+            $table->string('to_time_ar');
+            $table->string('location_ar');
         });
         Schema::enableForeignKeyConstraints();
     }

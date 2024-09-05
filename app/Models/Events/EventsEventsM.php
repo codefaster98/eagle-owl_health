@@ -27,7 +27,13 @@ class EventsEventsM extends Model
         'from_time',
         'to_time',
         'location',
-        'date_details'
+        'date_details',
+        'price_ar',
+        'date_ar',
+        'date_details_ar',
+        'from_time_ar',
+        'to_time_ar',
+        'location_ar'
     ];
 
     public function users()
