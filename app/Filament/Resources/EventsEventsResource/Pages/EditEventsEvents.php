@@ -54,7 +54,18 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->label("image")->disk('public')->directory('events_events')->visibility('public')->required(false),
+                // FileUpload::make('image')
+                // ->label("image")->
+                // disk('public')
+                // ->directory('events_events')
+                // ->visibility('public')
+                // ->required(false),
+                FileUpload::make('image')
+                ->label('Image')
+                ->disk('public')
+                ->directory('events_events')
+                ->imagePreviewHeight('250')
+                ->nullable(),
                 Select::make('Speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('name_en', 'id'))
@@ -65,13 +76,32 @@ class EditEventsEvents extends EditRecord
 
     }
 
-    protected function handleRecordUpdate(Model $record, array $data): Model
+    // protected function handleRecordUpdate(Model $record, array $data): Model
+    // {
+    //     \Log::info('Updating record with data:', $data);
+    //     $record->update($data);
+    //     $record->Speakers()->sync($data['Speakers'] ?? []);
+    //     return $record;
+    // }
+
+    protected function afterSave(): void
     {
-        \Log::info('Updating record with data:', $data);
-        $record->update($data);
-        $record->Speakers()->sync($data['Speakers'] ?? []);
-        return $record;
+        $data = $this->form->getState();
+        if (!empty($data['delete_image']) && $data['delete_image']) {
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+                $this->record->update(['image' => null]);
+            }
+        }
+        if (request()->hasFile('image')) {
+            $file = request()->file('image');
+            $imagePath = $file->store('events_events', 'public');
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+            }
+            $this->record->update(['image' => $imagePath]);
+        } else {
+            $this->record->update($data);
+        }
     }
-
-
 }
