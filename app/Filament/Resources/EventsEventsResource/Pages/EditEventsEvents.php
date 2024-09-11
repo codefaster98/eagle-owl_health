@@ -87,21 +87,25 @@ class EditEventsEvents extends EditRecord
     protected function afterSave(): void
     {
         $data = $this->form->getState();
-        if (!empty($data['delete_image']) && $data['delete_image']) {
-            if ($this->record->image) {
-                Storage::disk('public')->delete($this->record->image);
-                $this->record->update(['image' => null]);
-            }
+
+        // Handle image deletion
+        if (!empty($data['delete_image']) && $data['delete_image'] && $this->record->image) {
+            Storage::disk('public')->delete($this->record->image);
+            $this->record->update(['image' => null]);
         }
+
+        // Handle image upload
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $imagePath = $file->store('events_events', 'public');
+
+            // Delete old image if exists
             if ($this->record->image) {
                 Storage::disk('public')->delete($this->record->image);
             }
+
             $this->record->update(['image' => $imagePath]);
-        } else {
-            $this->record->update($data);
         }
     }
+
 }
