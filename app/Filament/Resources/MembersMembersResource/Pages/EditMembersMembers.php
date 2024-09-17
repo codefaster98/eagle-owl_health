@@ -6,6 +6,7 @@ use Filament\Actions;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
@@ -54,5 +55,29 @@ class EditMembersMembers extends EditRecord
                 ->default(false)
                 ->helperText('Check to remove the current image.'),
             ]);
+
+
+    }
+
+
+     protected function afterSave(): void
+    {
+        $data = $this->form->getState();
+
+        if (isset($data['delete_image']) && $data['delete_image']) {
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+                $this->record->update(['image' => '']);
+            }
+        }
+        if (request()->hasFile('image')) {
+            $file = request()->file('image');
+            $imagePath = $file->store('members_members', 'public');
+
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+            }
+            $this->record->update(['image' => $imagePath]);
+        }
     }
 }
