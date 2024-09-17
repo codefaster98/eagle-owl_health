@@ -46,7 +46,13 @@ class CreateEventsEvents extends CreateRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->required()->label("image")->disk('public')->directory('events_events'),
+                FileUpload::make('image')
+                ->required()
+                ->label("image")
+                ->disk('public')
+                ->directory('events_events')
+                ->image()
+                ->required(),
                 Select::make('Speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::whereNotNull('name_en')->pluck('name_en', 'id'))

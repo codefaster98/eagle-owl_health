@@ -41,7 +41,17 @@ class EditMembersMembers extends EditRecord
                 TextInput::make('website')->label("website"),
                 Textarea::make('desc_ar')->required()->label("Arabic Short Details"),
                 Textarea::make('desc_en')->required()->label("English Short Details"),
-                FileUpload::make('image')->required()->label("image")->disk('public')->directory('members_members'),
+                FileUpload::make('image')
+                ->required()
+                ->label("image")
+                ->disk('public')
+                ->directory('members_members')
+                ->imagePreviewHeight('250')
+                ->nullable(),
+                Checkbox::make('delete_image')
+                ->label('Delete current image')
+                ->default(false)
+                ->helperText('Check to remove the current image.'),
             ]);
     }
 }
