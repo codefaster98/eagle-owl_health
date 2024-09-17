@@ -2,13 +2,15 @@
 
 namespace App\Filament\Resources\SpeakersSpeakersResource\Pages;
 
-use App\Filament\Resources\SpeakersSpeakersResource;
 use Filament\Actions;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Textarea;
+use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Forms\Components\FileUpload;
+use App\Filament\Resources\SpeakersSpeakersResource;
 
 class EditSpeakersSpeakers extends EditRecord
 {
@@ -53,8 +55,38 @@ class EditSpeakersSpeakers extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->required()->label("image")->disk('public')->directory('speakers_speakers')
+                FileUpload::make('image')
+                ->label("image")
+                ->disk('public')
+                ->directory('speakers_speakers')
+                ->imagePreviewHeight('250')
+                ->nullable(),
+                Checkbox::make('delete_image')
+                ->label('Delete current image')
+                ->default(false)
+                ->helperText('Check to remove the current image.'),
             ]);
     }
-   
+
+    protected function afterSave(): void
+    {
+        $data = $this->form->getState();
+
+        if (isset($data['delete_image']) && $data['delete_image']) {
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+                $this->record->update(['image' => '']);
+            }
+        }
+        if (request()->hasFile('image')) {
+            $file = request()->file('image');
+            $imagePath = $file->store('speakers_speakers', 'public');
+
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+            }
+            $this->record->update(['image' => $imagePath]);
+        }
+    }
+
 }

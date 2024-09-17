@@ -5,8 +5,10 @@ namespace App\Filament\Resources\EventsEventsResource\Pages;
 use Filament\Actions;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\FileUpload;
@@ -54,7 +56,16 @@ class EditEventsEvents extends EditRecord
                 Textarea::make('short_desc_en')->required()->label("English Short Details"),
                 Textarea::make('long_desc_ar')->required()->label("Arabic Long Details"),
                 Textarea::make('long_desc_en')->required()->label("English Long Details"),
-                FileUpload::make('image')->label("image")->disk('public')->directory('events_events')->visibility('public')->required(false),
+                FileUpload::make('image')
+                ->label("image")
+                ->disk('public')
+                ->directory('events_events')
+                ->imagePreviewHeight('250')
+                ->nullable(),
+                Checkbox::make('delete_image')
+                ->label('Delete current image')
+                ->default(false)
+                ->helperText('Check to remove the current image.'),
                 Select::make('Speakers')
                     ->label('Speakers')
                     ->options(SpeakersSpeakersM::all()->pluck('name_en', 'id'))
@@ -73,5 +84,25 @@ class EditEventsEvents extends EditRecord
         return $record;
     }
 
+    protected function afterSave(): void
+    {
+        $data = $this->form->getState();
+
+        if (isset($data['delete_image']) && $data['delete_image']) {
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+                $this->record->update(['image' => '']);
+            }
+        }
+        if (request()->hasFile('image')) {
+            $file = request()->file('image');
+            $imagePath = $file->store('events_events', 'public');
+
+            if ($this->record->image) {
+                Storage::disk('public')->delete($this->record->image);
+            }
+            $this->record->update(['image' => $imagePath]);
+        }
+    }
 
 }
