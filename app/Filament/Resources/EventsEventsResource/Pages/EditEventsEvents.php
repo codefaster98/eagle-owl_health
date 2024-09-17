@@ -66,11 +66,17 @@ class EditEventsEvents extends EditRecord
                 ->label('Delete current image')
                 ->default(false)
                 ->helperText('Check to remove the current image.'),
-                Select::make('Speakers')
+                // Select::make('Speakers')
+                //     ->label('Speakers')
+                //     ->options(SpeakersSpeakersM::all()->pluck('name_en', 'id'))
+                //     ->searchable()
+                //     ->multiple()
+
+                    Select::make('Speakers')
                     ->label('Speakers')
-                    ->options(SpeakersSpeakersM::all()->pluck('name_en', 'id'))
-                    ->searchable()
-                    ->multiple()
+                    ->relationship('Speakers', 'name_en')
+                    ->required()
+                    ->multiple(),
 
             ]);
 
