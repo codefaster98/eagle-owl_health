@@ -4,6 +4,7 @@ namespace App\Filament\Resources\MembersMembersResource\Pages;
 
 use Filament\Actions;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
