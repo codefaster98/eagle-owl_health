@@ -102,8 +102,8 @@ class auth extends Controller
 
     //Verify Email
     public function Verify(AuthVerifyRequest $request)
-{
-    try {
+    {
+      try {
         // Verify the user inside a transaction
         $user = DB::transaction(function () use ($request) {
             return UsersUsersServices::Verify($request->user_code, $request->otp);
@@ -128,15 +128,15 @@ class auth extends Controller
                 null
             );
         }
-    } catch (\Throwable $th) {
+      } catch (\Throwable $th) {
         // Return error response in case of an exception
         return SystemApiResponseServices::ReturnError(
             9800,
             null,
             $th->getMessage(),
         );
+       }
     }
-}
 
 
     //ResendOtp To Verify Email
@@ -199,36 +199,7 @@ class auth extends Controller
             );
         }
     }
-
-    //Update User Profile
-    // public function UpdateProfile(AuthUpdateRequest $request)
-    // {
-    //     try {
-    //         $user = DB::transaction(function () use ($request) {
-    //             return UsersUsersServices::UpdateProfile($request->validated());
-    //         });
-    //         // dd($user);
-    //         if ($user) {
-    //             return  SystemApiResponseServices::ReturnSuccess(
-    //                 ["user" => $user],
-    //                 __("return_messages.user_users.UpdateSucc"),
-    //                 null
-    //             );
-    //         } else {
-    //             return  SystemApiResponseServices::ReturnFailed(
-    //                 [],
-    //                 __("return_messages.user_users.UpdateFailed"),
-    //                 null
-    //             );
-    //         }
-    //     } catch (\Throwable $th) {
-    //         return SystemApiResponseServices::ReturnError(
-    //             9800,
-    //             null,
-    //             $th->getMessage(),
-    //         );
-    //     }
-    // }
+    
     public function UpdateProfile(AuthUpdateRequest $request)
     {
         try {
