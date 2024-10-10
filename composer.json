@@ -11,9 +11,12 @@
         "php": "^8.2",
         "filament/filament": "^3.2",
         "filament/notifications": "^3.2",
+        "guzzlehttp/guzzle": "*",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "moyasar/moyasar": "^1.1",
+        "nafezly/payments": "dev-master",
+        "noaman-mahmoud/hyperpay": "*",
         "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {
