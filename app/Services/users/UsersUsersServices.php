@@ -163,5 +163,8 @@ class UsersUsersServices
         $user->deleted=true;
         return false;
     }
-
+    public static function Auth()
+    {
+        return auth()->user();
+    }
 }

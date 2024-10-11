@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\members\members;
 use App\Http\Controllers\Api\Payment\payments;
 use App\Http\Controllers\Api\events\eventsevents;
+use App\Http\Controllers\Api\Payment\EventsCheckout;
 use App\Http\Controllers\Api\memberships\memberships;
 use App\Http\Controllers\Api\form_request\contact_form;
 use App\Http\Controllers\Api\form_request\form_request;
@@ -61,6 +62,13 @@ Route::name("api.app.")
         ->group(function () {
             Route::post('Volunteer', 'Volunteer')->name("Volunteer");
         });
+        Route::name("payments.")
+        ->prefix("Payments/")
+        ->controller(EventsCheckout::class)
+        ->group(function () {
+        Route::get('Checkout-Verify/{payment?}', 'CheckoutVerify')->name("CheckoutVerify");
+        });
+
     });
 
     Route::name("api.app.")
@@ -70,11 +78,10 @@ Route::name("api.app.")
         // events routes
         Route::name("payments.")
             ->prefix("Payments/")
-            ->controller(payments::class)
+            ->controller(EventsCheckout::class)
             ->group(function () {
-            Route::get('/request-payment/{eventCode}', 'requestPayment');
-            Route::get('/checkout', 'checkout');
-            Route::get('/payment-status', 'paymentStatus');
+            Route::post('Checkout', 'Checkout')->name("Checkout");
+
 
         });
     });
