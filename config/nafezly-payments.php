@@ -19,5 +19,6 @@ return [
     // 'HYPERPAY_TOKEN' => "8a8294174d0595bb014d05d829cb01cd",
 
     'VERIFY_ROUTE_NAME' => "api.app.payments.CheckoutVerify",
+    // 'VERIFY_ROUTE_NAME' => "api.app.membership.CheckoutVerify",
     'APP_NAME' => "SHIMA",
 ];

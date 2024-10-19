@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Payment\EventsCheckout;
 use App\Http\Controllers\Api\memberships\memberships;
 use App\Http\Controllers\Api\form_request\contact_form;
 use App\Http\Controllers\Api\form_request\form_request;
+use App\Http\Controllers\Api\Payment\MemberShipCheckout;
 use App\Http\Controllers\Api\form_request\form_volunteer;
 
 // all routes without auth
@@ -69,6 +70,13 @@ Route::name("api.app.")
         Route::get('Checkout-Verify/{payment?}', 'CheckoutVerify')->name("CheckoutVerify");
         });
 
+        Route::name("membership.")
+        ->prefix("MemberShip/")
+        ->controller(MemberShipCheckout::class)
+        ->group(function () {
+        Route::get('Checkout-Verify/{payment?}', 'CheckoutVerify')->name("CheckoutVerify");
+        });
+
     });
 
     Route::name("api.app.")
@@ -81,7 +89,12 @@ Route::name("api.app.")
             ->controller(EventsCheckout::class)
             ->group(function () {
             Route::post('Checkout', 'Checkout')->name("Checkout");
-
-
+        });
+        // memberships routes
+        Route::name("MemberShip.")
+            ->prefix("MemberShip/")
+            ->controller(MemberShipCheckout::class)
+            ->group(function () {
+            Route::post('Checkout', 'Checkout')->name("Checkout");
         });
     });
