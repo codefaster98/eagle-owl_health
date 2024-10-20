@@ -9,6 +9,7 @@ class EventsEventUsersM extends Model
 {
     use HasFactory;
     protected $table = "events_event_users";
+    public $timestamps = false;
 
     protected $fillable = [
         'events_id',

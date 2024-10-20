@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\User\my;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\members\members;
 use App\Http\Controllers\Api\Payment\payments;
@@ -77,12 +78,26 @@ Route::name("api.app.")
         Route::get('Checkout-Verify/{payment?}', 'CheckoutVerify')->name("CheckoutVerify");
         });
 
+        Route::name("user.")
+        ->prefix("User/")
+        ->controller(my::class)
+        ->group(function () {
+            Route::post('profile', 'ProfileByCode')->name("ProfileByCode");
+        });
+
     });
 
     Route::name("api.app.")
     ->prefix("API/")
     ->middleware(['api_with_auth'])
     ->group(function () {
+        // User Calender
+        Route::name("myCalender.")
+        ->prefix("My/")
+        ->controller(my::class)
+        ->group(function () {
+            Route::get('Calender', 'myCalender')->name("myCalender");
+        });
         // events routes
         Route::name("payments.")
             ->prefix("Payments/")

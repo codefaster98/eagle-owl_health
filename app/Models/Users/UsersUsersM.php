@@ -37,8 +37,8 @@ class UsersUsersM extends Authenticatable  implements JWTSubject
         return $this->belongsToMany(
             EventsEventsM::class,
             'events_event_users',
+            'users_id',
             'events_id',
-            'users_id'
     );
     }
     protected function casts(): array

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin\AdminUsersAdminM;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Admin\AdminUsersAdminM;
+use App\Models\Events\EventsEventUsersM;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,14 +15,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        AdminUsersAdminM::create(
+        // AdminUsersAdminM::create(
+        //     [
+        //         'code' => 321,
+        //         'name' => "bhry",
+        //         'email' => "bhry@bhry.local",
+        //         'phone' => "01097033958",
+        //         'password' => "321",
+        //     ]
+
+        //  'events_id',
+        // 'users_id',
+        // 'payment_id',
+        // 'payment_details',
+        // 'time', php artisan db:seed
+
+        // );
+        EventsEventUsersM::create(
             [
-                'code' => 321,
-                'name' => "bhry",
-                'email' => "bhry@bhry.local",
-                'phone' => "01097033958",
-                'password' => "321",
+                'events_id' => 2,
+                'users_id' => 8,
+                'payment_id' => "pay1234598",
+                'payment_details' => json_encode(['method' => 'Visa']),
+                'time' => "11.30",
             ]
         );
+
+
     }
 }

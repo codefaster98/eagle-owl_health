@@ -17,7 +17,7 @@ return new class extends Migration
             $table->collation = 'utf8_general_ci';
             $table->id();
             $table->foreignId('events_id')->nullable()->references('id')->on('events_events')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->references('id')->on('users_users')->constrained()->cascadeOnDelete();
+            $table->foreignId('users_id')->nullable()->references('id')->on('users_users')->constrained()->cascadeOnDelete();
 
             $table->string('payment_id')->nullable();
             $table->json('payment_details')->nullable();

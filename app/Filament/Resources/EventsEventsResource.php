@@ -29,6 +29,7 @@ class EventsEventsResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('title_en'),
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('short_desc_en')->limit(50),

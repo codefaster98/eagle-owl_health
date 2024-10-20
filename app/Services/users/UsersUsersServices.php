@@ -5,6 +5,7 @@ namespace App\Services\users;
 use Illuminate\Support\Str;
 use App\Models\Users\UsersUsersM;
 use App\Mail\users\VerifyCodeEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\users\ResetPasswordCode;
 
@@ -166,5 +167,28 @@ class UsersUsersServices
     public static function Auth()
     {
         return auth()->user();
+    }
+
+    static public function myCalender(array $relations = [])
+    {
+        $user = Auth::user();
+        // dd($user);
+        if ($user) {
+            return $user->events;
+        }
+        return null;
+    }
+
+    static public function getUserByCodeWithRelations(string $code, array $relations = [])
+    {
+
+        $user = UsersUsersM::where('code', $code)->with($relations)->first();
+
+        if ($user) {
+            return $user;
+        } else {
+            return null;
+        }
+
     }
 }
