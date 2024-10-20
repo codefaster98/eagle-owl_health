@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         // );
         EventsEventUsersM::create(
             [
-                'events_id' => 2,
+                'events_id' => 3,
                 'users_id' => 8,
                 'payment_id' => "pay1234598",
                 'payment_details' => json_encode(['method' => 'Visa']),
