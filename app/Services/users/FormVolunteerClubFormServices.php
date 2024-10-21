@@ -51,7 +51,7 @@ class FormVolunteerClubFormServices
 
         // Send the email
         Mail::raw($messageBody, function ($message) {
-            $message->to('shimaa0mohamed19@gmail.com')
+            $message->to('info@shima.org.sa')
                 ->subject('New Volunteer Application');
         });
 
