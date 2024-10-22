@@ -23,17 +23,11 @@ class DatabaseSeeder extends Seeder
         //         'phone' => "01097033958",
         //         'password' => "321",
         //     ]
-
-        //  'events_id',
-        // 'users_id',
-        // 'payment_id',
-        // 'payment_details',
         // 'time', php artisan db:seed
-
         // );
         EventsEventUsersM::create(
             [
-                'events_id' => 3,
+                'events_id' => 8,
                 'users_id' => 8,
                 'payment_id' => "pay1234598",
                 'payment_details' => json_encode(['method' => 'Visa']),
