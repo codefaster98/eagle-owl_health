@@ -8,6 +8,7 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use App\Models\Events\EventsEventsM;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\EventsEventsResource\Pages;
 
 class EventsEventsResource extends Resource
@@ -21,7 +22,9 @@ class EventsEventsResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([]);
+        ->schema([
+        //   
+        ]);
 
     }
 
@@ -35,7 +38,7 @@ class EventsEventsResource extends Resource
                 Tables\Columns\TextColumn::make('title_ar'),
                 Tables\Columns\TextColumn::make('short_desc_en')->limit(50),
                 Tables\Columns\TextColumn::make('short_desc_ar')->limit(50),
-                ImageColumn::make('image'),
+
                 Tables\Columns\TextColumn::make('Speakers.code')->label('Speakers'),
 
 

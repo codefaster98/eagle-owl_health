@@ -18,7 +18,8 @@ class FormRequrstContactServices
         $messageBody .= "Email: {$user->email}\n";
         $messageBody .= "Message: {$user->message}\n";
         Mail::raw($messageBody, function ($message) {
-            $message->to('info@shima.org.sa')
+            // $message->to('info@shima.org.sa')
+            $message->to('shimaa0mohamed19@gmail.com')
                 ->subject('New Form Request');
         });
         Notification::make()
